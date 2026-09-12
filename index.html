@@ -263,6 +263,11 @@
             transition: opacity 150ms ease;
         }
 
+        /* whole-card link cards open the project page instead of the lightbox */
+        .project-card.project-link figure img {
+            cursor: pointer;
+        }
+
         #lightbox {
             display: none;
             position: fixed;
@@ -991,6 +996,12 @@
                         <p class="font-body-md text-body-md text-ink-soft">A campaign built for Eric's table: character
                             sheets, AI-generated portraits and an intro film — Nyx's sheet alone has been revised every
                             few months since 2024.</p>
+                        <a href="https://dnd-championship-festival.netlify.app/mechanics/the%20champion%20festival%20challenges"
+                            target="_blank" rel="noopener"
+                            class="mt-gutter inline-flex items-center gap-1 font-body-md text-body-md text-ink hover:text-secondary transition-colors">
+                            <span>Championship Festival mechanics</span>
+                            <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+                        </a>
                     </div>
                 </article>
 
@@ -1012,6 +1023,28 @@
                             and archived.</p>
                     </div>
                 </article>
+
+                <a href="spirograph/spirograph.html" target="_blank" rel="noopener"
+                    title="Open the Spirograph simulator" class="block group">
+                    <article class="masonry-item project-card project-link">
+                        <figure class="h-64 overflow-hidden">
+                            <img src="assets/img/spirograph.jpg"
+                                alt="Screenshot of the Spirograph simulator: a violet gear-drawing curve tracing itself on a dark canvas with parameter sliders"
+                                width="903" height="1956" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">CODE · ART · 2026</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Spirograph</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">Classic gear drawing, reimagined in code —
+                                dial in the outer radius, the gear and the pen distance, then watch the curve trace
+                                itself. Click the card to draw your own.</p>
+                        </div>
+                    </article>
+                </a>
 
             </div>
         </section>
@@ -1043,7 +1076,7 @@
             class="mt-section-gap border-t border-concrete pt-gutter pb-4 flex flex-wrap items-center justify-between gap-gutter">
             <span class="font-caption text-caption text-secondary">© <span id="year">2026</span> Miró Missotten</span>
             <span class="font-caption text-caption text-secondary/60">Content synced from the workshop notebook —
-                2026-09-11</span>
+                2026-09-12</span>
             <span class="font-caption text-caption text-secondary/60">One page, no build step. View source — that's the
                 whole site.</span>
         </footer>
@@ -1153,7 +1186,7 @@
                 lightbox.setAttribute("aria-hidden", "true");
                 lightboxImg.src = "";
             }
-            document.querySelectorAll(".project-card figure img").forEach(function (img) {
+            document.querySelectorAll(".project-card:not(.project-link) figure img").forEach(function (img) {
                 img.addEventListener("click", function () {
                     lightboxImg.src = img.src;
                     lightboxImg.alt = img.alt;

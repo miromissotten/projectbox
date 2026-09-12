@@ -1,0 +1,395 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+
+<title>Spirograph Simulator</title>
+<style>
+body{font-family:sans-serif;background:#0b0e14;color:#e8ecf3;margin:0;display:flex;flex-direction:column;align-items:center;padding:20px}
+header{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+h1{font-size:18px;font-weight:600;margin:0;display:flex;gap:10px}
+.subtitle{color:#8b94a6;font-size:12px}
+.badge{background:#1a1f2b;border:1px solid #262d3c;border-radius:8px;padding:6px 10px;font-size:12px;font-variant-numeric:tabular-nums}
+main{width:100%;max-width:1100px;display:grid;grid-template-columns:1fr 320px;gap:16px}
+canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:14px;border:1px solid #222a3a;box-shadow:0 18px 40px -22px rgba(0,0,0,.7);background:#0b0e14}
+.canvas-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;padding:10px 14px;font-size:11px;color:#8b94a6;pointer-events:none;background:linear-gradient(to top,rgba(11,14,20,.5),transparent)}
+aside{display:flex;flex-direction:column;gap:12px}
+.panel{background:#131720;border:1px solid #222a3a;border-radius:12px;padding:14px}
+.panel h2{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.9px;color:#8b94a6;font-weight:600}
+.row{display:flex;align-items:center;gap:8px;margin:6px 0}
+.row label{flex:0 0 84px;color:#8b94a6;font-size:12px}
+input[type=range]{flex:1;accent-color:#7aa6ff}
+.btn{border:1px solid #2a3244;background:#1a1f2b;color:#e8ecf3;padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer}
+.btn:hover{background:#242c3c}
+.btn.primary{background:linear-gradient(180deg,#3a5a9e,#2b4588);border-color:#314c85;color:#fff}
+.btn.ghost{background:transparent}
+.btn.small{padding:6px 9px;font-size:11px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.preset{background:#1a1f2b;border:1px solid #2a3244;border-radius:8px;padding:8px 10px;cursor:pointer;font-size:11px}
+.preset:hover{background:#242c3c}
+.preset .name{font-weight:600}
+.preset .meta{color:#8b94a6;font-size:10px;margin-top:2px}
+.seg{display:flex;border:1px solid #2a3244;border-radius:8px;overflow:hidden;background:#1a1f2b}
+.seg button{border:none;background:transparent;color:#8b94a6;padding:7px 12px;font-size:12px;cursor:pointer;border-right:1px solid #2a3244}
+.seg button:last-child{border-right:none}
+.seg button.active{background:#7aa6ff;color:#0b0e14;font-weight:600}
+.coords{color:#6fdcb2;font-variant-numeric:tabular-nums}
+footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>
+    <span style="color:#7aa6ff;font-size:22px">✦</span>
+    Spirograph Simulator
+    <span class="subtitle">classic gear drawing, reimagined in code</span>
+  </h1>
+  <div class="topsummary">
+    <span class="badge" id="statPoints">0 points</span>
+    <span class="badge" id="statCoords">R 200 · r 60 · d 90 · 3 rev</span>
+  </div>
+</header>
+<main>
+  <div class="canvas-wrap" style="position:relative">
+    <canvas id="cv" width="600" height="600"></canvas>
+    <div class="canvas-foot">
+      <span>Drag on canvas to reposition the animation center · <code>Shift</code>+scroll to zoom</span>
+      <span class="coords" id="mouseCoords">—</span>
+    </div>
+  </div>
+
+  <aside>
+    <div class="panel">
+      <h2>Parameters</h2>
+      <div class="row">
+        <label>Outer radius R</label>
+        <input type="range" id="R" min="20" max="260" step="1" value="180" />
+        <input type="number" id="Rnum" min="20" max="260" step="1" value="180" />
+      </div>
+      <div class="row">
+        <label>Moving radius r</label>
+        <input type="range" id="r" min="5" max="160" step="1" value="60" />
+        <input type="number" id="rnum" min="5" max="160" step="1" value="60" />
+      </div>
+      <div class="row">
+        <label>Pen distance d</label>
+        <input type="range" id="d" min="0" max="140" step="1" value="90" />
+        <input type="number" id="dnum" min="0" max="140" step="1" value="90" />
+      </div>
+      <div class="row">
+        <label>Revolutions</label>
+        <input type="range" id="rev" min="1" max="20" step="1" value="3" />
+        <input type="number" id="revnum" min="1" max="20" step="1" value="3" />
+      </div>
+      <div class="row">
+        <label>Line width</label>
+        <input type="range" id="lw" min="0.4" max="4" step="0.1" value="1.2" />
+        <span class="val" id="lwVal" style="flex:0 0 42px">1.2</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Color</h2>
+      <div class="row inline">
+        <input type="color" id="color" value="#7aa6ff" />
+        <label style="flex:0 0 auto">— Background</label>
+        <input type="color" id="bgcolor" value="#0b0e14" />
+      </div>
+      <div class="row mt2" style="margin-top:8px">
+        <label>Alpha</label>
+        <input type="range" id="alpha" min="0.08" max="1" step="0.01" value="0.92" />
+        <span class="val" id="alphaVal" style="flex:0 0 42px">0.92</span>
+      </div>
+      <div class="row mt2" style="margin-top:6px">
+        <label>Blend</label>
+        <div class="seg" id="blendSeg" style="flex:1">
+          <button data-blend="source-over" class="active">Normal</button>
+          <button data-blend="multiply">Multiply</button>
+          <button data-blend="lighter">Additive</button>
+          <button data-blend="screen">Screen</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Controls</h2>
+      <div class="btn-row">
+        <button class="btn primary" id="drawBtn">Draw</button>
+        <button class="btn ghost" id="animateBtn">Animate</button>
+        <button class="btn ghost" id="clearBtn">Clear</button>
+        <button class="btn small" id="resetBtn">Reset view</button>
+      </div>
+      <div class="row mt2" style="margin-top:8px">
+        <label>Speed</label>
+        <input type="range" id="speed" min="0.2" max="6" step="0.1" value="1.6" />
+        <span class="val" id="speedVal" style="flex:0 0 42px">1.6</span>
+      </div>
+      <div class="row mt2" style="margin-top:6px">
+        <label>Animate by</label>
+        <div class="seg" id="anmodeSeg" style="flex:1">
+          <button data-anmode="angle" class="active">Angle θ</button>
+          <button data-anmode="rev">Revolutions</button>
+        </div>
+      </div>
+      <div class="btn-row mt2" style="margin-top:8px">
+        <button class="btn small" id="saveBtn">Save PNG</button>
+        <button class="btn small" id="mirrorBtn">Toggle mirror overlay</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Presets</h2>
+      <div class="preset-grid">
+        <div class="preset" data-preset="classic">
+          <div class="name">Classic square</div>
+          <div class="meta">R 180 · r 60 · d 90</div>
+        </div>
+        <div class="preset" data-preset="flower">
+          <div class="name">Flower</div>
+          <div class="meta">R 180 · r 51 · d 120</div>
+        </div>
+        <div class="preset" data-preset="star">
+          <div class="name">Star burst</div>
+          <div class="meta">R 180 · r 45 · d 80</div>
+        </div>
+        <div class="preset" data-preset="loop">
+          <div class="name">Loop</div>
+          <div class="meta">R 180 · r 72 · d 40</div>
+        </div>
+        <div class="preset" data-preset="dense">
+          <div class="name">Dense web</div>
+          <div class="meta">R 180 · r 48 · d 100 · 5 rev</div>
+        </div>
+        <div class="preset" data-preset="ratio9">
+          <div class="name">9:1 ratio</div>
+          <div class="meta">R 180 · r 20 · d 90</div>
+        </div>
+        <div class="preset" data-preset="ratio73">
+          <div class="name">7:3 curls</div>
+          <div class="meta">R 180 · r 77 · d 55</div>
+        </div>
+        <div class="preset" data-preset="negative">
+          <div class="name">Negative d</div>
+          <div class="meta">R 180 · r 60 · d −50</div>
+        </div>
+      </div>
+      <div class="mode-help">
+        The spirograph curve is traced by a pen point at distance <code>d</code>
+        from the center of a wheel of radius <code>r</code> rolling inside a fixed
+        ring of radius <code>R</code>.
+      </div>
+    </div>
+  </aside>
+
+<footer>
+  Parametric spirograph · epicycloid/hypocycloid family · built as a single self-contained HTML file
+</footer>
+
+<script>
+"use strict";
+
+(function(){
+
+  // ---- canvas / state ----
+  const cv = document.getElementById("cv");
+  const ctx = cv.getContext("2d");
+  const W = 600, H = 600;
+  cv.width = W; cv.height = H;
+
+  let viewCenter = {x:W/2, y:H/2};
+  let viewZoom = 1.0;
+  let spiroCenter = {x:0, y:0};
+
+  let points = [];
+  let mirrorOverlay = false;
+
+  let animId = null;
+  let animRunning = false;
+  let animMode = "angle";
+  let animTheta = 0;
+  let drawRequest = null;
+  let blendMode = "source-over";
+
+  // ---- DOM refs ----
+  const R = document.getElementById("R"), Rnum = document.getElementById("Rnum");
+  const r = document.getElementById("r"), rnum = document.getElementById("rnum");
+  const d0 = document.getElementById("d"), dnum = document.getElementById("dnum");
+  const rev = document.getElementById("rev"), revnum = document.getElementById("revnum");
+  const lw = document.getElementById("lw"), lwVal = document.getElementById("lwVal");
+  const colorEl = document.getElementById("color");
+  const bgEl = document.getElementById("bgcolor");
+  const alphaEl = document.getElementById("alpha"), alphaVal = document.getElementById("alphaVal");
+  const speedEl = document.getElementById("speed"), speedVal = document.getElementById("speedVal");
+  const drawBtn = document.getElementById("drawBtn");
+  const animateBtn = document.getElementById("animateBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const saveBtn = document.getElementById("saveBtn");
+  const mirrorBtn = document.getElementById("mirrorBtn");
+  const statPoints = document.getElementById("statPoints");
+  const statCoords = document.getElementById("statCoords");
+  const mouseCoords = document.getElementById("mouseCoords");
+  const blendSeg = document.getElementById("blendSeg");
+  const anmodeSeg = document.getElementById("anmodeSeg");
+
+  // ---- helpers ----
+  function clamp(v,a,b){ return (v<a?a:(v>b?b:v)); }
+
+  function spiroPoint(t, Rv, rv, dv){
+    const k = (Rv - rv) / rv;
+    return {
+      x: (Rv - rv)*Math.cos(t) + dv*Math.cos(k*t),
+      y: (Rv - rv)*Math.sin(t) - dv*Math.sin(k*t)
+    };
+  }
+
+  function totalTheta(revs){ return 2*Math.PI*Math.max(0.001, revs); }
+
+  function sampleCurve(){
+    const Rv=+R.value, rv=+r.value, dv=+d0.value, revs=+rev.value;
+    const thetaEnd = totalTheta(revs);
+    const n = Math.max(40, Math.ceil(thetaEnd/(2*Math.PI)*620));
+    const dt = thetaEnd/n;
+    points = [];
+    for(let i=0;i<=n;i++) points.push(spiroPoint(i*dt, Rv, rv, dv));
+  }
+
+  function worldToScreen(wx,wy){
+    return { x: viewCenter.x+(wx-spiroCenter.x)*viewZoom, y: viewCenter.y+(wy-spiroCenter.y)*viewZoom };
+  }
+  function screenToWorld(sx,sy){
+    return { x: spiroCenter.x+(sx-viewCenter.x)/viewZoom, y: spiroCenter.y+(sy-viewCenter.y)/viewZoom };
+  }
+
+  // ---- drawing ----
+  function drawBackground(){
+    ctx.fillStyle = bgEl.value;
+    ctx.fillRect(0,0,W,H);
+    const g = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.55);
+    g.addColorStop(0,"rgba(255,255,255,0.03)");
+    g.addColorStop(1,"rgba(0,0,0,0.02)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+  }
+  function drawGuideRing(){
+    const Rv=+R.value;
+    ctx.save();
+    ctx.lineWidth = Math.max(0.6,1.0*viewZoom);
+    ctx.strokeStyle = "rgba(255,255,255,0.05)";
+    ctx.beginPath();
+    const N=72;
+    for(let i=0;i<=N;i++){
+      const a=(i/N)*2*Math.PI;
+      const sx=viewCenter.x+Rv*Math.cos(a)*viewZoom;
+      const sy=viewCenter.y+Rv*Math.sin(a)*viewZoom;
+      if(i===0) ctx.moveTo(sx,sy); else ctx.lineTo(sx,sy);
+    }
+    ctx.closePath(); ctx.stroke(); ctx.restore();
+  }
+  function drawSpiro(){
+    if(points.length<2) return;
+    const col=colorEl.value, alpha=clamp(parseFloat(alphaEl.value)||0.92,0.08,1);
+    const lwpx=parseFloat(lw.value)||1.2;
+    const rC=parseInt(col.slice(1,3),16), gC=parseInt(col.slice(3,5),16), bC=parseInt(col.slice(5,7),16);
+    ctx.save();
+    ctx.globalCompositeOperation=blendMode;
+    ctx.translate(viewCenter.x,viewCenter.y);
+    ctx.scale(viewZoom,viewZoom);
+    ctx.translate(-spiroCenter.x,-spiroCenter.y);
+    const sets=[{pts:points}];
+    if(mirrorOverlay) sets.push({pts:points.map(p=>({x:p.x,y:-p.y}))});
+    for(const set of sets){
+      const pts=set.pts;
+      ctx.lineWidth=lwpx; ctx.lineJoin="round"; ctx.lineCap="round";
+      const grad=ctx.createLinearGradient(pts[0].x,pts[0].y,pts[pts.length-1].x,pts[pts.length-1].y);
+      grad.addColorStop(0,`rgba(${rC},${gC},${bC},${alpha})`);
+      grad.addColorStop(1,`rgba(${rC},${gC},${bC},${Math.max(0.05,alpha*0.7)})`);
+      ctx.strokeStyle=grad;
+      ctx.beginPath();
+      for(let i=0;i<pts.length;i++){
+        if(i===0) ctx.moveTo(pts[i].x,pts[i].y); else ctx.lineTo(pts[i].x,pts[i].y);
+      }
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+  function drawPenMarker(){
+    const Rv=+R.value, rv=+r.value, dv=+d0.value;
+    const p=spiroPoint(animTheta,Rv,rv,dv);
+    const sx=viewCenter.x+(spiroCenter.x+p.x-spiroCenter.x)*viewZoom;
+    const sy=viewCenter.y+(spiroCenter.y+p.y-spiroCenter.y)*viewZoom;
+    ctx.save(); ctx.translate(sx,sy);
+    const rad=4*viewZoom;
+    ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(0,0,Math.max(2,rad),0,2*Math.PI); ctx.fill();
+    ctx.strokeStyle="#0b0e14"; ctx.lineWidth=Math.max(1,1.2*viewZoom); ctx.stroke();
+    ctx.restore();
+  }
+  function redraw(){
+    drawBackground(); drawGuideRing(); drawSpiro();
+    if(animRunning) drawPenMarker();
+  }
+  function requestFullRedraw(){
+    if(drawRequest) return;
+    drawRequest=requestAnimationFrame(()=>{drawRequest=null; redraw();});
+  }
+
+  // ---- animation ----
+  function startAnimation(){
+    if(animRunning) return;
+    animRunning=true; animTheta=0; sampleCurve();
+    animateBtn.textContent="Pause"; animateBtn.classList.add("primary");
+    cancelAnimationFrame(animId);
+    const speed=parseFloat(speedEl.value)||1.6;
+    let last=performance.now();
+    function frame(now){
+      if(!animRunning){ animateBtn.textContent="Animate"; animateBtn.classList.remove("primary"); return; }
+      const dt=Math.min(0.05,(now-last)/1000); last=now;
+      const maxT=totalTheta(+rev.value);
+      const dtheta = animMode==="rev" ? speed*Math.PI*2*dt : speed*Math.PI*2/4*dt;
+      animTheta+=dtheta;
+      if(animTheta>=maxT){
+        animTheta=maxT; animRunning=false;
+        animateBtn.textContent="Animate"; animateBtn.classList.remove("primary");
+        requestFullRedraw(); return;
+      }
+      requestFullRedraw();
+      animId=requestAnimationFrame(frame);
+    }
+    animId=requestAnimationFrame(frame);
+  }
+  function stopAnimation(){
+    animRunning=false;
+    if(animId!=null){ cancelAnimationFrame(animId); animId=null; }
+    animateBtn.textContent="Animate"; animateBtn.classList.remove("primary");
+    redraw();
+  }
+  function toggleAnimation(){ if(animRunning) stopAnimation(); else startAnimation(); }
+
+  function updateStats(){
+    statPoints.textContent = points.length.toLocaleString()+" points";
+    statCoords.textContent = `R ${R.value} · r ${r.value} · d ${d0.value} · ${rev.value} rev`;
+  }
+  function afterParamChange(){
+    if(animRunning) stopAnimation();
+    sampleCurve(); updateStats(); requestFullRedraw();
+  }
+
+  function bindRange(el,num){
+    el.addEventListener("input",()=>{ num.value=el.value; afterParamChange(); });
+    num.addEventListener("input",()=>{
+      let v=parseFloat(num.value); const mn=parseFloat(num.min),mx=parseFloat(num.max),st=parseFloat(num.step||1);
+      if(!isNaN(v)) v=clamp(Math.round(v/st)*st,mn,mx);
+      num.value=v; el.value=v; afterParamChange();
+    });
+  }
+  bindRange(R,Rnum); bindRange(r,rnum); bindRange(d0,dnum); bindRange(rev,revnum);
+
+  lw.addEventListener("input",()=>{ lwVal.textContent=parseFloat(lw.value).toFixed(1); requestFullRedraw(); });
+  alphaEl.addEventListener("input",()=>{ alphaVal.textContent=parseFloat(alphaEl.value).toFixed(2); requestFullRedraw(); });
+  bgEl.addEventListener("input",requestFullRedraw);
+  colorEl.addEventListener("input",requestFullRedraw);
+  speedEl.addEventListener("input",()=>{ speedVal.textContent=parseFloat(speedEl.value).toFixed(1); });
+  blendSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ blendSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); blendMode=btn.dataset.blend; requestFullRedraw(); }); });  anmodeSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ anmodeSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); animMode=btn.dataset.anmode; }); });  drawBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); sampleCurve(); updateStats(); requestFullRedraw(); });  animateBtn.addEventListener("click",toggleAnimation); clearBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); points=[]; updateStats(); redraw(); }); resetBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); viewZoom=1; spiroCenter={x:0,y:0}; viewCenter={x:W/2,y:H/2}; requestFullRedraw(); }); saveBtn.addEventListener("click",()=>{ animRunning=false; redraw(); const link=document.createElement("a"); link.download=`spirograph_R${R.value}_r${r.value}_d${d0.value}_rev${rev.value}.png`; link.href=cv.toDataURL("image/png"); link.click(); }); mirrorBtn.addEventListener("click",()=>{ mirrorOverlay=!mirrorOverlay; mirrorBtn.textContent=mirrorOverlay?"Mirror: ON":"Toggle mirror overlay"; requestFullRedraw(); });  const presets = { classic:{R:180,r:60,d:90,rev:3}, flower:{R:180,r:51,d:120,rev:3}, star:{R:180,r:45,d:80,rev:3}, loop:{R:180,r:72,d:40,rev:3}, dense:{R:180,r:48,d:100,rev:5}, ratio9:{R:180,r:20,d:90,rev:3}, ratio73:{R:180,r:77,d:55,rev:3}, negative:{R:180,r:60,d:-50,rev:3} }; document.querySelectorAll(".preset").forEach(el=>{ el.addEventListener("click",()=>{ const s=presets[el.dataset.preset]; if(!s) return; R.value=s.R; Rnum.value=s.R; r.value=s.r; rnum.value=s.r; d0.value=s.d; dnum.value=s.d; rev.value=s.rev; revnum.value=s.rev; afterParamChange(); }); });  cv.addEventListener("mousemove",e=>{ const rect=cv.getBoundingClientRect(); const sx=(e.clientX-rect.left)*(W/rect.width); const sy=(e.clientY-rect.top)*(H/rect.height); const w=screenToWorld(sx,sy); mouseCoords.textContent=`world (${w.x.toFixed(1)}, ${w.y.toFixed(1)}) · screen (${sx.toFixed(0)}, ${sy.toFixed(0)})`; }); cv.addEventListener("mouseleave",()=>{ mouseCoords.textContent="—"; }); let drag=null; cv.addEventListener("pointerdown",e=>{ drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); }); cv.addEventListener("pointermove",e=>{ if(!drag) return; const rect=cv.getBoundingClientRect(); const nx=(e.clientX-rect.left)*(W/rect.width); const ny=(e.clientY-rect.top)*(H/rect.height); spiroCenter.x-=(nx-drag.x)/viewZoom; spiroCenter.y-=(ny-drag.y)/viewZoom; viewCenter.x=W/2; viewCenter.y=H/2; drag.x=nx; drag.y=ny; requestFullRedraw(); }); cv.addEventListener("pointerup",()=>{ drag=null; }); cv.addEventListener("pointercancel",()=>{ drag=null; });  cv.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault(); const rect=cv.getBoundingClientRect(); const sx=(e.clientX-rect.left)*(W/rect.width); const sy=(e.clientY-rect.top)*(H/rect.height); const oldW=screenToWorld(sx,sy); const factor=Math.exp(-e.deltaY/200); const newZoom=clamp(viewZoom*factor,0.1,20); viewZoom=newZoom; viewCenter.x=sx-(sx-viewCenter.x)*(viewZoom/(viewZoom/factor)); viewCenter.y=sy-(sy-viewCenter.y)*(viewZoom/(viewZoom/factor)); requestFullRedraw(); },{passive:false}); sampleCurve(); updateStats(); redraw(); })();</script>
+</body>
+</html>
