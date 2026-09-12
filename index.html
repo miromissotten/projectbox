@@ -1,0 +1,891 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miró Missotten — maker, musician, cook</title>
+    <meta name="description"
+        content="Portfolio of Miró Missotten: lamps, videos, music, food and other stubborn projects. Brussels.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        paper: "rgb(var(--paper-rgb) / <alpha-value>)",
+                        "paper-deep": "rgb(var(--paper-deep-rgb) / <alpha-value>)",
+                        ink: "rgb(var(--ink-rgb) / <alpha-value>)",
+                        "ink-soft": "rgb(var(--ink-soft-rgb) / <alpha-value>)",
+                        concrete: "rgb(var(--concrete-rgb) / <alpha-value>)",
+                        graphite: "rgb(var(--graphite-rgb) / <alpha-value>)",
+                        secondary: "rgb(var(--secondary-rgb) / <alpha-value>)"
+                    },
+                    spacing: {
+                        unit: "8px",
+                        "margin-mobile": "24px",
+                        gutter: "32px",
+                        "margin-desktop": "64px",
+                        "section-gap": "128px"
+                    },
+                    fontFamily: {
+                        display: ["Hanken Grotesk", "sans-serif"],
+                        "headline-lg": ["Hanken Grotesk", "sans-serif"],
+                        "headline-md": ["Hanken Grotesk", "sans-serif"],
+                        "body-lg": ["Hanken Grotesk", "sans-serif"],
+                        "body-md": ["Hanken Grotesk", "sans-serif"],
+                        caption: ["Hanken Grotesk", "sans-serif"],
+                        "label-caps": ["Hanken Grotesk", "sans-serif"]
+                    },
+                    fontSize: {
+                        display: ["80px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "300" }],
+                        "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "1.4", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        caption: ["13px", { lineHeight: "1.4", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1.0", letterSpacing: "0.1em", fontWeight: "500" }]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        :root {
+            --paper: #F6F1EA;
+            --paper-rgb: 246 241 234;
+            --paper-deep: #EDE2D7;
+            --paper-deep-rgb: 237 226 215;
+            --ink: #1F1A17;
+            --ink-rgb: 31 26 23;
+            --ink-soft: #3F352F;
+            --ink-soft-rgb: 63 53 47;
+            --concrete: #D9C9B9;
+            --concrete-rgb: 217 201 185;
+            --graphite: #5B4B41;
+            --graphite-rgb: 91 75 65;
+            --secondary: #6D5D52;
+            --secondary-rgb: 109 93 82;
+            --shadow-soft: 0 18px 40px rgba(31, 26, 23, 0.06);
+            --shadow-hover: 0 24px 48px rgba(31, 26, 23, 0.10);
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.72), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.5), transparent 40%),
+                linear-gradient(180deg, var(--paper) 0%, #F3EDE4 100%);
+            color: var(--ink);
+            min-height: 100vh;
+            font-synthesis-weight: none;
+        }
+
+        section[id] {
+            scroll-margin-top: 5rem;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 64px;
+        }
+
+        nav,
+        #mobile-drawer,
+        footer,
+        article {
+            box-shadow: var(--shadow-soft);
+        }
+
+        nav,
+        #mobile-drawer,
+        footer {
+            background: rgba(246, 241, 234, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        button {
+            transition: color 180ms ease, box-shadow 180ms ease;
+        }
+
+        button:hover {
+            box-shadow: 0 10px 22px rgba(31, 26, 23, 0.08);
+        }
+
+        /* ---- project cards & chips (var-driven so dark mode flips for free) ---- */
+        .project-card {
+            background: var(--paper-deep);
+            border: 1px solid var(--concrete);
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-placeholder {
+            position: relative;
+            overflow: hidden;
+            background:
+                repeating-linear-gradient(-45deg, transparent 0 14px, rgba(91, 75, 65, 0.05) 14px 15px),
+                linear-gradient(160deg, var(--paper) 0%, var(--concrete) 100%);
+            color: var(--graphite);
+        }
+
+        .card-placeholder::after {
+            content: "";
+            position: absolute;
+            inset: auto -10% -55% -10%;
+            height: 70%;
+            background: radial-gradient(ellipse at center bottom, rgba(31, 26, 23, 0.08), transparent 70%);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: "Hanken Grotesk", sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            padding: 6px 14px;
+            border: 1px solid var(--concrete);
+            color: var(--secondary);
+        }
+
+        .chip .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 9999px;
+            flex: none;
+        }
+
+        .chip-active {
+            color: #A8431F;
+            border-color: rgba(196, 85, 43, 0.55);
+            background: rgba(196, 85, 43, 0.12);
+        }
+
+        .chip-active .dot {
+            background: #C4552B;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .chip-resting {
+            color: #6D5D52;
+            border-color: rgba(138, 122, 108, 0.55);
+            background: rgba(138, 122, 108, 0.14);
+        }
+
+        .chip-resting .dot {
+            background: #8A7A6C;
+        }
+
+        .chip-released {
+            color: #3D633D;
+            border-color: rgba(78, 122, 78, 0.55);
+            background: rgba(78, 122, 78, 0.13);
+        }
+
+        .chip-released .dot {
+            background: #4E7A4E;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+        }
+
+        html.dark .chip-active {
+            color: #E89B6F;
+        }
+
+        html.dark .chip-resting {
+            color: #C2B1A0;
+        }
+
+        html.dark .chip-released {
+            color: #9CC49C;
+        }
+
+        /* ---- image lightbox (click card image to enlarge, click again to close) ---- */
+        .project-card figure img {
+            cursor: zoom-in;
+        }
+
+        .project-card figure img:hover {
+            opacity: 0.92;
+            transition: opacity 150ms ease;
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            background: rgba(21, 17, 15, 0.88);
+            backdrop-filter: blur(6px);
+            padding: 32px;
+            cursor: zoom-out;
+        }
+
+        #lightbox.is-open {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ---- dark mode ---- */
+        html.dark {
+            --paper: #15110F;
+            --paper-rgb: 21 17 15;
+            --paper-deep: #241D18;
+            --paper-deep-rgb: 36 29 24;
+            --ink: #F7F1E8;
+            --ink-rgb: 247 241 232;
+            --ink-soft: #E4D9CC;
+            --ink-soft-rgb: 228 217 204;
+            --concrete: #66584D;
+            --concrete-rgb: 102 88 77;
+            --graphite: #C2B1A0;
+            --graphite-rgb: 194 177 160;
+            --secondary: #C5B5A6;
+            --secondary-rgb: 197 181 166;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+            --shadow-hover: 0 24px 48px rgba(0, 0, 0, 0.45);
+        }
+
+        html.dark body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.03), transparent 40%),
+                linear-gradient(180deg, var(--paper) 0%, #120F0D 100%);
+        }
+
+        html.dark nav,
+        html.dark #mobile-drawer,
+        html.dark footer {
+            background: rgba(21, 17, 15, 0.92);
+        }
+
+        html.dark .card-placeholder {
+            background:
+                repeating-linear-gradient(-45deg, transparent 0 14px, rgba(239, 231, 220, 0.04) 14px 15px),
+                linear-gradient(160deg, var(--paper-deep) 0%, var(--concrete) 100%);
+        }
+
+        html.dark .card-placeholder::after {
+            background: radial-gradient(ellipse at center bottom, rgba(0, 0, 0, 0.35), transparent 70%);
+        }
+
+        .mobile-topbar {
+            background: rgba(246, 241, 234, 0.85);
+            backdrop-filter: blur(8px);
+        }
+
+        html.dark .mobile-topbar {
+            background: rgba(21, 17, 15, 0.92);
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col md:flex-row selection:bg-ink selection:text-paper">
+
+    <div id="mobile-drawer-overlay"
+        class="fixed inset-0 bg-ink/20 backdrop-blur-sm z-[60] hidden transition-opacity duration-300 opacity-0"></div>
+
+    <div id="mobile-drawer"
+        class="fixed top-0 left-0 h-full w-80 bg-paper border-r border-concrete z-[70] -translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-margin-mobile">
+        <div class="flex justify-between items-center mb-12">
+            <span class="font-headline-md text-headline-md tracking-tighter text-ink">Miró Missotten</span>
+            <button id="close-drawer" class="p-2 -mr-2 text-ink hover:text-secondary transition-colors"
+                aria-label="Close menu">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-6">
+            <a href="#index" data-section="index"
+                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INDEX</a>
+            <a href="#projects" data-section="projects"
+                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">PROJECTS</a>
+            <a href="#contact" data-section="contact"
+                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">CONTACT</a>
+        </nav>
+        <div class="mt-auto pb-gutter border-t border-concrete pt-gutter">
+            <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
+            <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
+                class="font-body-md text-body-md text-ink hover:underline block">youtube.com/@miromis</a>
+            <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
+                class="font-body-md text-body-md text-ink hover:underline block">github.com/miromissotten</a>
+            <p class="font-caption text-caption text-secondary/60 mt-4">email slot reserved</p>
+        </div>
+    </div>
+
+    <div
+        class="mobile-topbar fixed top-0 inset-x-0 z-40 md:hidden flex items-center justify-between px-margin-mobile py-4 border-b border-concrete">
+        <span class="font-headline-md text-headline-md tracking-tighter text-ink">Miró Missotten</span>
+        <button id="open-drawer" class="p-2 -mr-2 text-ink hover:text-secondary transition-colors"
+            aria-label="Open menu">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+
+    <aside
+        class="hidden md:flex sticky top-0 h-screen w-72 shrink-0 flex-col justify-between border-r border-concrete px-gutter py-margin-desktop">
+        <div>
+            <a href="#index"
+                class="font-headline-md text-headline-md tracking-tighter text-ink block mb-12 hover:text-secondary transition-colors">Miró
+                Missotten</a>
+            <nav class="flex flex-col gap-5">
+                <a href="#index" data-section="index"
+                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INDEX</a>
+                <a href="#projects" data-section="projects"
+                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">PROJECTS</a>
+                <a href="#contact" data-section="contact"
+                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">CONTACT</a>
+            </nav>
+        </div>
+        <div class="flex flex-col gap-8">
+            <div>
+                <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
+                <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
+                    class="font-caption text-caption text-ink hover:text-secondary transition-colors block">youtube.com/@miromis</a>
+                <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
+                    class="font-caption text-caption text-ink hover:text-secondary transition-colors block">github.com/miromissotten</a>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle dark mode"
+                class="flex items-center gap-unit w-max text-secondary hover:text-ink">
+                <span class="material-symbols-outlined icon-moon">dark_mode</span>
+                <span class="material-symbols-outlined icon-sun hidden">light_mode</span>
+                <span class="font-label-caps text-label-caps">SWITCH LIGHTS</span>
+            </button>
+        </div>
+    </aside>
+
+    <style>
+        html.dark .icon-moon {
+            display: none;
+        }
+
+        html.dark .icon-sun {
+            display: inline-block;
+        }
+
+        html:not(.dark) .icon-sun {
+            display: none;
+        }
+
+        .nav-link.is-active {
+            color: var(--ink);
+            border-bottom: 1px solid var(--ink);
+        }
+    </style>
+
+    <main class="flex-1 min-w-0 px-margin-mobile pt-20 pb-section-gap md:pt-0 md:px-margin-desktop">
+
+        <section id="index" class="min-h-[85vh] flex flex-col justify-center py-section-gap md:py-gutter">
+            <h1 class="font-display text-display max-w-4xl text-balance">Miró Missotten</h1>
+            <p class="font-body-lg text-body-lg text-ink-soft max-w-xl mt-gutter">
+                Lamps, cookbooks, escape rooms, videos — designed, built and filmed by one person in a small workshop.
+            </p>
+            <dl class="flex flex-wrap gap-x-section-gap gap-y-gutter mt-margin-desktop">
+                <div>
+                    <dt class="font-label-caps text-label-caps text-secondary mb-unit">MAKES</dt>
+                    <dd class="font-body-md text-body-md text-ink">lamps · videos · music · food</dd>
+                </div>
+                <div>
+                    <dt class="font-label-caps text-label-caps text-secondary mb-unit">TOOLS OF CHOICE</dt>
+                    <dd class="font-body-md text-body-md text-ink">saw · soldering iron · piano · oven</dd>
+                </div>
+            </dl>
+            <div class="flex flex-wrap gap-gutter mt-margin-desktop">
+                <a href="#projects"
+                    class="inline-flex items-center gap-unit bg-ink text-paper px-6 py-3 font-label-caps text-label-caps hover:bg-ink-soft transition-colors">SEE
+                    THE PROJECTS<span class="material-symbols-outlined"
+                        style="font-size:18px;">arrow_downward</span></a>
+                <a href="#contact"
+                    class="inline-flex items-center gap-unit border border-graphite text-ink px-6 py-3 font-label-caps text-label-caps hover:border-ink transition-colors">MORE?</a>
+            </div>
+        </section>
+
+        <section id="projects" class="pb-section-gap border-t border-concrete pt-section-gap">
+            <p class="font-label-caps text-label-caps text-secondary mb-gutter">PROJECTS</p>
+
+
+            <div class="masonry-grid mt-margin-desktop">
+
+                <article class="masonry-item project-card">
+                    <figure class="h-64 overflow-hidden">
+                        <img src="assets/img/keyholders.jpg"
+                            alt="Wooden board with magnetic key holders and keys hanging on it" width="1600"
+                            height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">VIDEO · WOODWORK · 2025</span>
+                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Keyholders</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">Six weird ways to never lose your keys again:
+                            nails, hidden magnets, LEGO and a guitar amp you can hang your keys on. Five prototypes are
+                            filmed — the magnetic board is the last build before the edit.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-44 overflow-hidden">
+                        <video src="assets/ringmaking.mp4" poster="assets/img/ringmaking-poster.jpg" controls preload="none" playsinline class="w-full h-full object-cover"></video>
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">CRAFT · 2025</span>
+                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Ringmaking</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">From scrap copper to carved wood to polished
+                            silver — a metalwork learning curve in three rings. The first ring's build is on film —
+                            press play above.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-56 overflow-hidden">
+                        <img src="assets/img/curiositycorner.jpg" alt="Vintage-style poster reading Curiosity Corner"
+                            width="1024" height="1024" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">COMMUNITY · 2025</span>
+                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">CuriosityCorner</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A living-room talk night where everyone
+                            brings five minutes on something they love — ramen science, baby names, pressure cookers,
+                            dream kitchens. Three editions in; the format waits for its next invite.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-48 overflow-hidden">
+                        <img src="assets/img/modularflavour.jpg" alt="Ramen flowchart page from the generated cookbook"
+                            width="1312" height="900" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">FOOD · DESIGN · 2026</span>
+                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">ModularFlavour</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A cookbook built like a modular synth:
+                            recipes are components — sauces, broths, breads — that patch together into dishes, generated
+                            and typeset into a finished book. v1 is shipped; book two is the current focus.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-60 overflow-hidden">
+                        <img src="assets/img/portable-sunrise.jpg"
+                            alt="Portable Sunrise prototype: ESP32 and addressable LED strip wired on a breadboard"
+                            width="1600" height="2134" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · 2025</span>
+                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Portable Sunrise</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A cube-shaped wake-up light around an ESP32
+                            and an LED strip: a 30-minute sunrise alarm, five brightness levels, colour modes and a
+                            battery that behaves. Electronics prototyped; the enclosure is the next step.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-52 overflow-hidden">
+                        <img src="assets/img/shoji-lamp.jpg"
+                            alt="Shoji-style table lamp glowing with a 3D-printed koi and dragon light panel"
+                            width="1600" height="2400" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">WOODWORK · 2026</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Shoji lamp</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A Japanese-style lantern: wooden frame,
+                            translucent 3D-printed koi-and-dragon light panels, warm light and very patient glue-ups.
+                            Built, glowing, and called done.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <div class="card-placeholder h-44 flex items-center justify-center">
+                        <span class="font-display" style="font-size: 104px;">E</span>
+                    </div>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2021</span>
+                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Escaperooms</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">Hand-built escape rooms for birthdays:
+                            string-traced world maps, chord-chart ciphers and story-driven locks that actually open.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-56 overflow-hidden">
+                        <img src="assets/img/espresso.jpg"
+                            alt="Yellow Rancilio Silvia espresso machine on the kitchen counter with grinder and kettle"
+                            width="1600" height="1066" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">COFFEE · 3D PRINT · 2025</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Espresso machine mods</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A Rancilio Silvia in workshop yellow: ESP32
+                            sensors, a printed steam knob and drip-tray float, and a single-dose mod for the Sage
+                            grinder. Espresso by engineering.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-64 overflow-hidden">
+                        <img src="assets/img/pickguardjbass.jpg"
+                            alt="Yellow Jazz Bass on a stand with a white 3D-printed pickguard showing a black sun and moon motif"
+                            width="1600" height="2400" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">MUSIC · CRAFT · 2025</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Pickguard JBass</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A pickguard for the Jazz Bass, designed in
+                            CAD and printed white with a black sun-and-moon motif — nine revisions from template to
+                            fitting. Now standard equipment on the yellow body.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-64 overflow-hidden">
+                        <img src="assets/img/multiplicationapp.jpg"
+                            alt="Phone screenshot of the multiplication app showing 68 × 76 with a green OK button"
+                            width="1080" height="2340" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">APP · CODE · 2026</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Multiplication App</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A native Android multiplication drill in 45
+                            lines of Java: two random numbers, one green OK button. Tap to check, tap again for the next
+                            pair — no ads, no framework, no fuss.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-56 overflow-hidden">
+                        <img src="assets/img/series7.jpg"
+                            alt="Yellow Series 7 chair with a black-and-copper marbled seat, next to a blue and a green chair"
+                            width="1600" height="2134" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · FURNITURE ·
+                                2026</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Series 7 chair</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">Arne Jacobsen's Series 7 chairs, refreshed
+                            with 3D-printed parts — yellow foot caps and printed fittings modelled from the original
+                            geometry. Three chairs done.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-40 overflow-hidden">
+                        <img src="assets/img/myfirstalbum.jpg"
+                            alt="White album cover with a blue handwritten signature — Miró, 2022" width="1600"
+                            height="1600" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">MUSIC · 2022</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">First album</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">'Miró — Miró' (2022): nine songs written,
+                            played and mixed at home, self-released with a signature-only cover. The first album — done
+                            enough to call done.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-52 overflow-hidden">
+                        <img src="assets/img/bikehandlebarends.jpg"
+                            alt="Close-up of the commuter's snowy handlebar with the printed yellow bar end" width="740"
+                            height="360" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · 2025</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Bike handlebar ends</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">Printed bar ends for the yellow commuter —
+                            modelled, printed, installed and ridden daily. Small part, finished cockpit.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <div class="card-placeholder h-44 flex items-center justify-center">
+                        <span class="font-display" style="font-size: 104px;">Y</span>
+                    </div>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · AUDIO · 2025</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">Yamaha HS7 covers</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">3D-printed covers for the Yamaha HS7
+                            monitors, designed around the cabinets and printed to fit exactly. Photogenic enough to
+                            deserve a real photo soon.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-56 overflow-hidden">
+                        <img src="assets/img/plantenbewateraar.jpg"
+                            alt="Spider plant hanging by the window — the plant the waterer keeps alive" width="1600"
+                            height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · GARDEN ·
+                                2022</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">PlantenBewateraar</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">An ESP32 watching the plants: two moisture
+                            sensors plus temperature and light on a loop, two pumps that only fire when the soil asks —
+                            readings streamed to a Google Sheet. On duty ever since.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-52 overflow-hidden">
+                        <img src="assets/img/dnd-eric.jpg"
+                            alt="AI-generated portrait of Nyx, the painted cat-dragon bard character, wearing a pink beret"
+                            width="768" height="1344" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
+                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">D&D: Eric's campaign</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">A campaign built for Eric's table: character
+                            sheets, AI-generated portraits and an intro film — Nyx's sheet alone has been revised every
+                            few months since 2024.</p>
+                    </div>
+                </article>
+
+                <article class="masonry-item project-card">
+                    <figure class="h-52 overflow-hidden">
+                        <img src="assets/img/dnd-lucas.jpg"
+                            alt="The Faerûn campaign map from Lucas's campaign shown on the TV at the table"
+                            width="1600" height="730" loading="lazy" decoding="async"
+                            class="w-full h-full object-cover">
+                    </figure>
+                    <div class="p-gutter">
+                        <div class="flex items-center justify-between gap-unit mb-4">
+                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
+                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md mb-3">D&D: Lucas's campaign</h3>
+                        <p class="font-body-md text-body-md text-ink-soft">The 2023 campaign for Lucas's group — Haldor
+                            the dwarf cleric, printable spell sheets and a stack of session photos and clips. Wrapped
+                            and archived.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="contact" class="border-t border-concrete pt-section-gap">
+            <p class="font-label-caps text-label-caps text-secondary mb-gutter">CONTACT</p>
+            <h2 class="font-headline-lg text-headline-lg max-w-2xl mb-gutter">Say ciaociao — or hallo.</h2>
+            <div class="flex flex-col gap-unit max-w-md mt-margin-desktop">
+                <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
+                    class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
+                    <span>youtube.com/@miromis</span>
+                    <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
+                </a>
+                <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
+                    class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
+                    <span>github.com/miromissotten</span>
+                    <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
+                </a>
+                <div class="border border-dashed border-concrete px-6 py-4 font-caption text-caption text-secondary/70">
+                    email slot reserved — arriving with v1.1</div>
+            </div>
+        </section>
+
+        <footer
+            class="mt-section-gap border-t border-concrete pt-gutter pb-4 flex flex-wrap items-center justify-between gap-gutter">
+            <span class="font-caption text-caption text-secondary">© <span id="year">2026</span> Miró Missotten</span>
+            <span class="font-caption text-caption text-secondary/60">Content synced from the workshop notebook —
+                2026-09-11</span>
+            <span class="font-caption text-caption text-secondary/60">One page, no build step. View source — that's the
+                whole site.</span>
+        </footer>
+    </main>
+
+    <div id="lightbox" role="dialog" aria-label="Enlarged project picture" aria-hidden="true">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            /* ---- theme ---- */
+            var root = document.documentElement;
+            var saved = null;
+            try { saved = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
+            if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                root.classList.add("dark");
+            }
+            document.getElementById("theme-toggle").addEventListener("click", function () {
+                root.classList.toggle("dark");
+                try { localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light"); } catch (e) { }
+            });
+
+            /* ---- mobile drawer ---- */
+            var drawer = document.getElementById("mobile-drawer");
+            var overlay = document.getElementById("mobile-drawer-overlay");
+            function openDrawer() {
+                drawer.classList.remove("-translate-x-full");
+                overlay.classList.remove("hidden");
+                requestAnimationFrame(function () { overlay.classList.remove("opacity-0"); });
+            }
+            function closeDrawer() {
+                drawer.classList.add("-translate-x-full");
+                overlay.classList.add("opacity-0");
+                setTimeout(function () { overlay.classList.add("hidden"); }, 300);
+            }
+            document.getElementById("open-drawer").addEventListener("click", openDrawer);
+            document.getElementById("close-drawer").addEventListener("click", closeDrawer);
+            overlay.addEventListener("click", closeDrawer);
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") { closeDrawer(); }
+            });
+
+            /* ---- scrollspy ---- */
+            var links = document.querySelectorAll(".nav-link");
+            var sections = document.querySelectorAll("main section[id]");
+            var spy = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) { return; }
+                    links.forEach(function (link) {
+                        link.classList.toggle("is-active", link.getAttribute("data-section") === entry.target.id);
+                    });
+                });
+            }, { rootMargin: "-40% 0px -55% 0px" });
+            sections.forEach(function (section) { spy.observe(section); });
+
+            /* ---- footer year ---- */
+            document.getElementById("year").textContent = String(new Date().getFullYear());
+
+            /* ---- image lightbox ---- */
+            var lightbox = document.getElementById("lightbox");
+            var lightboxImg = document.getElementById("lightbox-img");
+            function closeLightbox() {
+                lightbox.classList.remove("is-open");
+                lightbox.setAttribute("aria-hidden", "true");
+                lightboxImg.src = "";
+            }
+            document.querySelectorAll(".project-card figure img").forEach(function (img) {
+                img.addEventListener("click", function () {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add("is-open");
+                    lightbox.setAttribute("aria-hidden", "false");
+                });
+            });
+            lightbox.addEventListener("click", closeLightbox);
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && lightbox.classList.contains("is-open")) { closeLightbox(); }
+            });
+        })();
+    </script>
+</body>
+
+</html>

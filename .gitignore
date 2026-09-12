@@ -1,0 +1,10 @@
+# Internal project docs — private workflow notes, not for publication
+CONTEXT.md
+docs/
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+desktop.ini
+*.pyc
+__pycache__/
