@@ -479,10 +479,29 @@
             flex: none;
         }
 
-        .icon-onlyfans-lg {
-            width: 128px;
-            height: 32px;
+        .icon-onlyfans-word {
+            width: 56px;
+            height: 14px;
             flex: none;
+        }
+
+        /* circular logo buttons in the CONTACT section */
+        .social-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 9999px;
+            background: #FFFFFF;
+            border: 1px solid var(--concrete);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        }
+
+        .social-circle:hover {
+            transform: translateY(-2px);
+            border-color: var(--ink);
+            box-shadow: var(--shadow-hover);
         }
 
         /* ---- dark mode ---- */
@@ -1000,37 +1019,24 @@
         <section id="contact" class="border-t border-concrete pt-section-gap">
             <p class="font-label-caps text-label-caps text-secondary mb-gutter">CONTACT</p>
             <h2 class="font-headline-lg text-headline-lg max-w-2xl mb-gutter">Say ciaociao — or hallo.</h2>
-            <div class="flex flex-col gap-4 max-w-md mt-margin-desktop">
+            <div class="flex flex-wrap items-center gap-4 mt-margin-desktop">
                 <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                    aria-label="YouTube — youtube.com/@miromis"
-                    class="group flex items-center justify-between border border-concrete px-6 py-5 text-ink hover:border-ink hover:bg-paper-deep transition-colors">
+                    aria-label="YouTube — youtube.com/@miromis" class="social-circle">
                     <svg class="icon-32" aria-hidden="true"><use href="#icon-youtube"></use></svg>
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-0.5"
-                        style="font-size: 20px;">arrow_outward</span>
                 </a>
                 <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                    aria-label="GitHub — github.com/miromissotten"
-                    class="group flex items-center justify-between border border-concrete px-6 py-5 text-ink hover:border-ink hover:bg-paper-deep transition-colors">
+                    aria-label="GitHub — github.com/miromissotten" class="social-circle">
                     <svg class="icon-32" aria-hidden="true"><use href="#icon-github"></use></svg>
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-0.5"
-                        style="font-size: 20px;">arrow_outward</span>
                 </a>
                 <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                    aria-label="LinkedIn — linkedin.com/in/miromissotten"
-                    class="group flex items-center justify-between border border-concrete px-6 py-5 text-ink hover:border-ink hover:bg-paper-deep transition-colors">
+                    aria-label="LinkedIn — linkedin.com/in/miromissotten" class="social-circle">
                     <svg class="icon-32" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-0.5"
-                        style="font-size: 20px;">arrow_outward</span>
                 </a>
-                <button type="button" id="onlyfans-link" aria-label="OnlyFans easter egg"
-                    class="group flex items-center justify-between border border-concrete px-6 py-5 text-ink hover:border-ink hover:bg-paper-deep transition-colors">
-                    <svg class="icon-onlyfans-lg" aria-hidden="true"><use href="#icon-onlyfans"></use></svg>
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-0.5"
-                        style="font-size: 20px;">arrow_outward</span>
+                <button type="button" id="onlyfans-link" aria-label="OnlyFans easter egg" class="social-circle">
+                    <svg class="icon-onlyfans-word" aria-hidden="true"><use href="#icon-onlyfans-word"></use></svg>
                 </button>
-                <div class="border border-dashed border-concrete px-6 py-4 font-caption text-caption text-secondary/70">
-                    email slot reserved — arriving with v1.1</div>
             </div>
+            <p class="font-caption text-caption text-secondary/70 mt-6">email slot reserved — arriving with v1.1</p>
         </section>
 
         <footer
@@ -1081,9 +1087,8 @@
             <text x="12" y="15.5" text-anchor="middle" font-size="14" font-weight="600" fill="#FFFFFF"
                 style="font-family: 'Hanken Grotesk', sans-serif">in</text>
         </symbol>
-        <symbol id="icon-onlyfans" viewBox="0 0 96 24">
-            <rect x="1" y="1" width="94" height="22" rx="11" fill="#101C33" />
-            <text x="48" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF"
+        <symbol id="icon-onlyfans-word" viewBox="0 0 96 24">
+            <text x="48" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="#101C33"
                 style="font-family: 'Hanken Grotesk', sans-serif; letter-spacing: -0.2px">OnlyFans</text>
         </symbol>
     </svg>
