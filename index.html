@@ -434,6 +434,31 @@
             }
         }
 
+        /* ---- brand icons (inline SVG sprite: one hidden <svg>, <use> pointing at <symbol> ids) ---- */
+        .icon-sprite {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        .icon-16 {
+            width: 16px;
+            height: 16px;
+            flex: none;
+        }
+
+        .icon-20 {
+            width: 20px;
+            height: 20px;
+            flex: none;
+        }
+
+        .icon-onlyfans {
+            width: 80px;
+            height: 20px;
+            flex: none;
+        }
+
         /* ---- dark mode ---- */
         html.dark {
             --paper: #15110F;
@@ -513,11 +538,20 @@
         <div class="mt-auto pb-gutter border-t border-concrete pt-gutter">
             <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
             <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                class="font-body-md text-body-md text-ink hover:underline block">youtube.com/@miromis</a>
+                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
+                <svg class="icon-16" aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                <span>youtube.com/@miromis</span>
+            </a>
             <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                class="font-body-md text-body-md text-ink hover:underline block">github.com/miromissotten</a>
+                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
+                <svg class="icon-16" aria-hidden="true"><use href="#icon-github"></use></svg>
+                <span>github.com/miromissotten</span>
+            </a>
             <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                class="font-body-md text-body-md text-ink hover:underline block">linkedin.com/in/miromissotten</a>
+                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
+                <svg class="icon-16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                <span>linkedin.com/in/miromissotten</span>
+            </a>
             <p class="font-caption text-caption text-secondary/60 mt-4">email slot reserved</p>
         </div>
     </div>
@@ -550,11 +584,20 @@
             <div>
                 <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
                 <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                    class="font-caption text-caption text-ink hover:text-secondary transition-colors block">youtube.com/@miromis</a>
+                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
+                    <svg class="icon-16" aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                    <span>youtube.com/@miromis</span>
+                </a>
                 <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                    class="font-caption text-caption text-ink hover:text-secondary transition-colors block">github.com/miromissotten</a>
+                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
+                    <svg class="icon-16" aria-hidden="true"><use href="#icon-github"></use></svg>
+                    <span>github.com/miromissotten</span>
+                </a>
                 <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                    class="font-caption text-caption text-ink hover:text-secondary transition-colors block">linkedin.com/in/miromissotten</a>
+                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
+                    <svg class="icon-16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                    <span>linkedin.com/in/miromissotten</span>
+                </a>
             </div>
             <button id="theme-toggle" aria-label="Toggle dark mode"
                 class="flex items-center gap-unit w-max text-secondary hover:text-ink">
@@ -934,22 +977,31 @@
             <div class="flex flex-col gap-unit max-w-md mt-margin-desktop">
                 <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
                     class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
-                    <span>youtube.com/@miromis</span>
+                    <span class="flex items-center gap-3">
+                        <svg class="icon-20" aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                        <span class="font-caption text-caption text-secondary/70">youtube.com/@miromis</span>
+                    </span>
                     <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
                 </a>
                 <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
                     class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
-                    <span>github.com/miromissotten</span>
+                    <span class="flex items-center gap-3">
+                        <svg class="icon-20" aria-hidden="true"><use href="#icon-github"></use></svg>
+                        <span class="font-caption text-caption text-secondary/70">github.com/miromissotten</span>
+                    </span>
                     <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
                 </a>
                 <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
                     class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
-                    <span>linkedin.com/in/miromissotten</span>
+                    <span class="flex items-center gap-3">
+                        <svg class="icon-20" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                        <span class="font-caption text-caption text-secondary/70">linkedin.com/in/miromissotten</span>
+                    </span>
                     <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
                 </a>
                 <button type="button" id="onlyfans-link"
                     class="flex items-center justify-between border border-concrete px-6 py-4 font-body-md text-body-md text-ink hover:border-ink transition-colors">
-                    <span>OnlyFans</span>
+                    <svg class="icon-onlyfans" aria-hidden="true"><use href="#icon-onlyfans"></use></svg>
                     <span class="material-symbols-outlined" style="font-size: 20px;">arrow_outward</span>
                 </button>
                 <div class="border border-dashed border-concrete px-6 py-4 font-caption text-caption text-secondary/70">
@@ -988,6 +1040,27 @@
             <p class="fan-hint">click anywhere or press esc to close</p>
         </div>
     </div>
+
+    <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-youtube" viewBox="0 0 24 24">
+            <path fill="#FF0000"
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+        </symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24">
+            <rect x="0.5" y="0.5" width="23" height="23" rx="4" fill="#0A66C2" />
+            <text x="12" y="15.5" text-anchor="middle" font-size="14" font-weight="600" fill="#FFFFFF"
+                style="font-family: 'Hanken Grotesk', sans-serif">in</text>
+        </symbol>
+        <symbol id="icon-onlyfans" viewBox="0 0 96 24">
+            <rect x="1" y="1" width="94" height="22" rx="11" fill="#101C33" />
+            <text x="48" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF"
+                style="font-family: 'Hanken Grotesk', sans-serif; letter-spacing: -0.2px">OnlyFans</text>
+        </symbol>
+    </svg>
 
     <script>
         (function () {
