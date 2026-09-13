@@ -1,4 +1,4 @@
-yellow: F8E666
+yellow: fbbf24
 blue: 1F1C57
 beige: F2EFED
 

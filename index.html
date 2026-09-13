@@ -72,8 +72,8 @@
             --graphite-rgb: 31 28 87;
             --secondary: #1F1C57;
             --secondary-rgb: 31 28 87;
-            --accent: #F8E666;
-            --accent-rgb: 248 230 102;
+            --accent: #fbbf24;
+            --accent-rgb: 251 191 36;
             --accent-pink: #FFC7F0;
             --accent-pink-rgb: 255 199 240;
             --accent-green: #105639;
@@ -120,7 +120,8 @@
             transition: all 200ms ease;
         }
 
-        .glass-pill:active, .glass-pill:hover {
+        .glass-pill:active,
+        .glass-pill:hover {
             background: rgba(255, 255, 255, 0.07);
             border-color: rgba(251, 191, 36, 0.35);
             box-shadow: 0 0 20px -3px rgba(251, 191, 36, 0.2);
@@ -129,8 +130,8 @@
         /* Ambient glow background for sidebars */
         .ambient-glow {
             background: radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.04) 0%, transparent 45%),
-                        radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                        #0a0e19;
+                radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                #0a0e19;
         }
 
         /* Smooth transition presets */
@@ -140,31 +141,23 @@
 
         .carousel {
             position: relative;
-            margin-top: 32px;
-            border-top: 1px solid var(--concrete);
-            border-bottom: 1px solid var(--concrete);
-            background:
-                radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 55%),
-                linear-gradient(180deg, var(--paper-deep) 0%, var(--paper) 100%);
-            padding: 8px 0 22px;
+            padding: 8px 0 16px;
             overflow: hidden;
         }
+
         html.dark .carousel {
-            background:
-                radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 55%),
-                linear-gradient(180deg, var(--paper-deep) 0%, var(--paper) 100%);
+            background: none;
         }
+
         .carousel-viewport {
             position: relative;
             display: flex;
             align-items: stretch;
-            gap: 20px;
+            gap: 10px;
             overflow-x: auto;
             overflow-y: hidden;
             scroll-snap-type: x mandatory;
-            padding: 40px calc(50% - min(38vw, 170px) - 10px) 72px;
-            perspective: 1200px;
-            perspective-origin: 50% 42%;
+            padding: 24px calc(50% - min(38vw, 170px) - 5px) 40px;
             scrollbar-width: none;
             overscroll-behavior-x: contain;
             touch-action: pan-x pinch-zoom;
@@ -172,82 +165,130 @@
             -webkit-user-select: none;
             user-select: none;
         }
+
         .carousel-viewport::-webkit-scrollbar {
             display: none;
         }
+
         .carousel-viewport:active {
             cursor: grabbing;
         }
+
         .carousel-viewport.is-dragging {
             scroll-snap-type: none;
             cursor: grabbing;
         }
-        .carousel-viewport > .project-card,
-        .carousel-viewport > a {
+
+        .carousel-viewport>.project-card,
+        .carousel-viewport>a {
             flex: 0 0 min(76vw, 340px);
             scroll-snap-align: center;
             margin-bottom: 0;
-            transform-origin: center center;
-            transform-style: preserve-3d;
-            will-change: transform;
             position: relative;
         }
-        .carousel-viewport > a {
+
+        .carousel-viewport>a {
             text-decoration: none;
             color: inherit;
         }
+
         @media (min-width: 768px) {
             .carousel-viewport {
-                gap: 24px;
-                padding-left: calc(50% - 170px - 12px);
-                padding-right: calc(50% - 170px - 12px);
+                gap: 12px;
+                padding-left: calc(50% - 170px - 6px);
+                padding-right: calc(50% - 170px - 6px);
             }
-            .carousel-viewport > .project-card,
-            .carousel-viewport > a {
+
+            .carousel-viewport>.project-card,
+            .carousel-viewport>a {
                 flex-basis: 340px;
             }
         }
-        /* glossy floor: sheen + fade under the whole strip (Cover Flow vibe) */
-        .carousel-floor {
-            pointer-events: none;
-            height: 70px;
-            margin-top: -64px;
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 60%),
-                radial-gradient(60% 100% at 50% 0%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 70%);
-        }
-        html.dark .carousel-floor {
-            background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 22%, rgba(0, 0, 0, 0) 55%),
-                radial-gradient(60% 100% at 50% 0%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-        }
 
-        .carousel-viewport > a .masonry-item {
+        .carousel-viewport>a .masonry-item {
             width: 100%;
             height: 100%;
         }
+
         .carousel-viewport:focus-visible {
             outline: 2px solid var(--ink);
             outline-offset: -2px;
         }
+
         @media (prefers-reduced-motion: reduce) {
-            .carousel-viewport > .project-card,
-            .carousel-viewport > a {
+
+            .carousel-viewport>.project-card,
+            .carousel-viewport>a {
                 transition: none;
             }
         }
+
         /* controls row under the stage — site palette, not a black bar */
         .carousel-ui {
-            padding-left: max(24px, calc((100% - 1280px) / 2 + 64px));
-            padding-right: max(24px, calc((100% - 1280px) / 2 + 64px));
+            padding-left: max(16px, calc((100% - 1280px) / 2 + 64px));
+            padding-right: max(16px, calc((100% - 1280px) / 2 + 64px));
             color: var(--ink);
         }
+
+        .carousel-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 0 4px;
+        }
+
+        .carousel-filter-label {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .carousel-filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .carousel-filter-btn {
+            align-self: flex-start;
+            padding: 7px 12px;
+            font: inherit;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ink);
+            background: transparent;
+            border: 1px solid var(--concrete);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+        }
+
+        .carousel-filter-btn:hover {
+            border-color: var(--ink-soft);
+            color: var(--ink);
+        }
+
+        .carousel-filter-btn[aria-pressed="true"] {
+            background: var(--ink);
+            color: var(--paper);
+            border-color: var(--ink);
+        }
+
+        .carousel-filter-btn:focus-visible {
+            outline: 2px solid var(--ink);
+            outline-offset: 2px;
+        }
+
         .carousel-ui .carousel-caption {
             color: var(--ink);
         }
+
         .carousel-ui .carousel-caption-sub {
             color: var(--ink-soft);
         }
+
         .carousel-btn {
             width: 48px;
             height: 48px;
@@ -261,18 +302,22 @@
             color: var(--ink);
             transition: background 200ms ease, color 200ms ease, opacity 200ms ease, transform 150ms ease;
         }
+
         .carousel-btn:hover:not(:disabled) {
             background: var(--ink);
             color: var(--paper);
             border-color: var(--ink);
         }
+
         .carousel-btn:active:not(:disabled) {
             transform: scale(0.94);
         }
+
         .carousel-btn:disabled {
             opacity: 0.3;
             cursor: default;
         }
+
         .carousel-progress {
             height: 2px;
             background: var(--concrete);
@@ -281,6 +326,7 @@
             flex: 1;
             min-width: 80px;
         }
+
         .carousel-progress-bar {
             height: 100%;
             width: 10%;
@@ -362,7 +408,7 @@
         .chip-active {
             color: #105639;
             border-color: rgba(16, 86, 57, 0.6);
-            background: #F8E666;
+            background: #fbbf24;
         }
 
         .chip-active .dot {
@@ -565,7 +611,7 @@
             height: 24px;
             margin: -12px 0 0 -12px;
             border-radius: 9999px;
-            background: #F8E666;
+            background: #fbbf24;
             border: 3px solid #F2EFED;
         }
 
@@ -620,6 +666,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+
             .fan-blades,
             .is-open .fan-scene {
                 animation: none;
@@ -715,10 +762,10 @@
             --concrete-rgb: 46 42 99;
             --graphite: #C9C5B5;
             --graphite-rgb: 201 197 181;
-            --secondary: #F8E666;
-            --secondary-rgb: 248 230 102;
-            --accent: #F8E666;
-            --accent-rgb: 248 230 102;
+            --secondary: #fbbf24;
+            --secondary-rgb: 251 191 36;
+            --accent: #fbbf24;
+            --accent-rgb: 251 191 36;
             --accent-pink: #FFC7F0;
             --accent-pink-rgb: 255 199 240;
             --accent-green: #8FB89E;
@@ -773,7 +820,7 @@
     </style>
 </head>
 
-<body class="antialiased min-h-screen flex flex-col md:flex-row selection:bg-ink selection:text-paper">
+<body class="antialiased min-h-screen flex flex-col selection:bg-ink selection:text-paper">
 
     <div id="mobile-drawer-overlay"
         class="fixed inset-0 bg-ink/20 backdrop-blur-sm z-[60] hidden transition-opacity duration-300 opacity-0"></div>
@@ -782,7 +829,8 @@
         class="fixed top-0 left-0 h-full w-80 bg-midnight-900 border-r border-white/10 z-[70] -translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 backdrop-blur-sm">
         <!-- Available status indicator -->
         <div class="flex items-center gap-2 mb-4">
-            <span class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-[10px] font-mono tracking-wide text-emerald-400 bg-emerald-950/60 border border-emerald-500/20">
+            <span
+                class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-[10px] font-mono tracking-wide text-emerald-400 bg-emerald-950/60 border border-emerald-500/20">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 AVAILABLE FOR PROJECTS
             </span>
@@ -801,28 +849,26 @@
                 class="group relative flex items-center justify-between py-3 text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
                 <div class="flex items-center gap-4">
                     <span class="text-xs font-mono text-amber-400/60">01</span>
-                    <span class="uppercase font-semibold tracking-widest text-amber-300 border-b border-amber-400/60 pb-0.5">INDEX</span>
+                    <span
+                        class="uppercase font-semibold tracking-widest text-amber-300 border-b border-amber-400/60 pb-0.5">INDEX</span>
                 </div>
             </a>
             <a href="#projects" data-section="projects"
                 class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
                 <div class="flex items-center gap-4">
-                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">02</span>
-                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">PROJECTS</span>
-                </div>
-            </a>
-            <a href="#interests" data-section="interests"
-                class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
-                <div class="flex items-center gap-4">
-                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">03</span>
-                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">INTERESTS</span>
+                    <span
+                        class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">02</span>
+                    <span
+                        class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">PROJECTS</span>
                 </div>
             </a>
             <a href="#contact" data-section="contact"
                 class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
                 <div class="flex items-center gap-4">
-                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">04</span>
-                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">CONTACT</span>
+                    <span
+                        class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">03</span>
+                    <span
+                        class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">CONTACT</span>
                 </div>
             </a>
         </nav>
@@ -835,21 +881,36 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <!-- YouTube -->
-                    <a aria-label="YouTube Channel" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                    <a aria-label="YouTube Channel"
+                        class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group"
+                        href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+                            </path>
                         </svg>
                     </a>
                     <!-- GitHub -->
-                    <a aria-label="GitHub Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://github.com/miromissotten" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+                    <a aria-label="GitHub Profile"
+                        class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group"
+                        href="https://github.com/miromissotten" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform"
+                            viewBox="0 0 24 24">
+                            <path clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                fill-rule="evenodd"></path>
                         </svg>
                     </a>
                     <!-- LinkedIn -->
-                    <a aria-label="LinkedIn Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z"></path>
+                    <a aria-label="LinkedIn Profile"
+                        class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group"
+                        href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z">
+                            </path>
                         </svg>
                     </a>
                 </div>
@@ -857,7 +918,9 @@
             <!-- Theme Toggle -->
             <button id="theme-toggle-btn"
                 class="group inline-flex items-center gap-3 text-amber-400/90 hover:text-amber-300 transition-colors py-1 w-max">
-                <svg class="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" x2="12" y1="1" y2="3"></line>
                     <line x1="12" x2="12" y1="21" y2="23"></line>
@@ -878,7 +941,8 @@
         <span class="font-headline-md text-headline-md tracking-tighter text-white">Miró Missotten</span>
         <button id="open-drawer" class="p-2 -mr-2 text-slate-300 hover:text-amber-400 transition-colors"
             aria-label="Open menu">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -887,80 +951,65 @@
     </div>
 
     <aside
-        class="hidden md:flex sticky top-0 h-screen w-72 shrink-0 flex-col justify-between border-r border-white/10 px-8 py-8 bg-midnight-900 backdrop-blur-sm">
-        <div>
-            <!-- Available status indicator -->
-            <div class="flex items-center gap-2 mb-4">
-                <span class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-[10px] font-mono tracking-wide text-emerald-400 bg-emerald-950/60 border border-emerald-500/20">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    AVAILABLE FOR PROJECTS
-                </span>
-            </div>
+        class="hidden md:flex fixed top-0 inset-x-0 z-40 items-center justify-between px-margin-desktop py-4 border-b border-white/10">
+        <div class="flex items-center gap-8">
             <a href="#index"
-                class="font-headline-md text-headline-md tracking-tighter text-white block mb-12 hover:text-amber-400 transition-colors">Miró
+                class="font-headline-md text-headline-md tracking-tighter text-white hover:text-amber-400 transition-colors">Miró
                 Missotten</a>
-            <nav class="flex flex-col gap-1">
+            <nav class="flex items-center gap-6">
                 <a href="#index" data-section="index"
-                    class="group relative flex items-center justify-between py-3 text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xs font-mono text-amber-400/60">01</span>
-                        <span class="uppercase font-semibold tracking-widest text-amber-300 border-b border-amber-400/60 pb-0.5">INDEX</span>
-                    </div>
+                    class="text-amber-400 font-sans tracking-widest text-sm font-medium transition-colors">
+                    <span class="uppercase font-semibold tracking-widest">INDEX</span>
                 </a>
                 <a href="#projects" data-section="projects"
-                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">02</span>
-                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">PROJECTS</span>
-                    </div>
-                </a>
-                <a href="#interests" data-section="interests"
-                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">03</span>
-                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">INTERESTS</span>
-                    </div>
+                    class="text-slate-300 hover:text-amber-400 font-sans tracking-widest text-sm font-medium transition-colors">
+                    <span class="uppercase font-semibold tracking-widest">PROJECTS</span>
                 </a>
                 <a href="#contact" data-section="contact"
-                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
-                    <div class="flex items-center gap-4">
-                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">04</span>
-                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">CONTACT</span>
-                    </div>
+                    class="text-slate-300 hover:text-amber-400 font-sans tracking-widest text-sm font-medium transition-colors">
+                    <span class="uppercase font-semibold tracking-widest">CONTACT</span>
                 </a>
             </nav>
         </div>
-        <div class="flex flex-col gap-8">
-            <div>
-                <div class="font-label-caps text-label-caps text-amber-400/90 mb-4 flex items-center gap-2">
-                    FIND THE WORK
-                    <span class="h-[1px] flex-1 bg-white/10"></span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <!-- YouTube -->
-                    <a aria-label="YouTube Channel" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
-                        </svg>
-                    </a>
-                    <!-- GitHub -->
-                    <a aria-label="GitHub Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://github.com/miromissotten" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <!-- LinkedIn -->
-                    <a aria-label="LinkedIn Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
-                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z"></path>
-                        </svg>
-                    </a>
-                </div>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
+                <!-- YouTube -->
+                <a aria-label="YouTube Channel"
+                    class="w-9 h-9 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-colors"
+                    href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z">
+                        </path>
+                    </svg>
+                </a>
+                <!-- GitHub -->
+                <a aria-label="GitHub Profile"
+                    class="w-9 h-9 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-colors"
+                    href="https://github.com/miromissotten" rel="noopener" target="_blank">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path clip-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </a>
+                <!-- LinkedIn -->
+                <a aria-label="LinkedIn Profile"
+                    class="w-9 h-9 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-colors"
+                    href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path
+                            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z">
+                        </path>
+                    </svg>
+                </a>
             </div>
             <!-- Theme Toggle -->
             <button id="theme-toggle"
-                class="group inline-flex items-center gap-3 text-amber-400/90 hover:text-amber-300 transition-colors py-1 w-max">
-                <svg class="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                class="group inline-flex items-center gap-2 text-amber-400/90 hover:text-amber-300 transition-colors py-1">
+                <svg class="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="5"></circle>
                     <line x1="12" x2="12" y1="1" y2="3"></line>
                     <line x1="12" x2="12" y1="21" y2="23"></line>
@@ -971,12 +1020,20 @@
                     <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
                     <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
                 </svg>
-                <span class="font-mono text-xs tracking-widest uppercase font-medium">SWITCH LIGHTS</span>
             </button>
         </div>
     </aside>
 
     <style>
+        /* ---- utility ---- */
+        .mt-2 { margin-top: 0.5rem; }
+
+        /* ---- top header backdrop ---- */
+        aside {
+            background: var(--topbar-bg, rgba(0, 5, 8, 0.92));
+            backdrop-filter: blur(8px);
+        }
+
         /* ---- hero typographic layout, based on assets/branding/heropage.svg ---- */
         .hero-name {
             font-family: "Cambria", "Georgia", "Times New Roman", serif;
@@ -1030,7 +1087,7 @@
         }
     </style>
 
-    <main class="flex-1 min-w-0 px-margin-mobile pt-20 pb-section-gap md:pt-0 md:px-margin-desktop">
+    <main class="flex-1 min-w-0 px-margin-mobile pt-20 pb-section-gap md:pt-24 md:px-margin-desktop">
 
         <section id="index"
             class="relative overflow-hidden min-h-[85vh] flex flex-col justify-center py-section-gap md:py-gutter">
@@ -1050,379 +1107,419 @@
             </div>
         </section>
 
-        <section id="projects" class="pb-section-gap border-t border-concrete pt-section-gap md:overflow-visible">
-            <p class="font-label-caps text-label-caps text-secondary mb-gutter">PROJECTS</p>
-            <p class="font-body-md text-body-md text-ink-soft max-w-xl">Drag, swipe or use the arrows —
-                the middle project steps forward, the rest fall back.</p>
+        <section id="projects" class="pb-section-gap md:overflow-visible">
 
 
-            <div class="carousel mt-margin-desktop" role="region" aria-roledescription="carousel"
+            <div class="carousel" role="region" aria-roledescription="carousel"
                 aria-label="Projects carousel — use the previous and next buttons to browse">
+                <div class="carousel-filter" id="carousel-filter">
+                    <span class="carousel-filter-label font-label-caps text-label-caps text-secondary tracking-wide">Filter</span>
+                    <div class="carousel-filter-row">
+                        <button type="button" class="carousel-filter-btn" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="carousel-filter-btn" data-filter="video" aria-pressed="false">VIDEO</button>
+                        <button type="button" class="carousel-filter-btn" data-filter="woodwork" aria-pressed="false">WOODWORK</button>
+                        <button type="button" class="carousel-filter-btn" data-filter="graphics" aria-pressed="false">GRAPHICS</button>
+                        <button type="button" class="carousel-filter-btn" data-filter="dev" aria-pressed="false">DEV</button>
+                    </div>
+                    <span class="carousel-filter-label font-label-caps text-label-caps text-secondary tracking-wide mt-2">Status</span>
+                    <div class="carousel-filter-row">
+                        <button type="button" class="carousel-filter-btn" data-status="all" aria-pressed="true">All</button>
+                        <button type="button" class="carousel-filter-btn" data-status="active" aria-pressed="false">ACTIVE</button>
+                        <button type="button" class="carousel-filter-btn" data-status="released" aria-pressed="false">RELEASED</button>
+                        <button type="button" class="carousel-filter-btn" data-status="resting" aria-pressed="false">RESTING</button>
+                    </div>
+                </div>
                 <div class="carousel-viewport" id="project-carousel" tabindex="0">
 
-                <article class="masonry-item project-card">
-                    <figure class="h-64 overflow-hidden">
-                        <img src="assets/img/keyholders.jpg"
-                            alt="Wooden board with magnetic key holders and keys hanging on it" width="1600"
-                            height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">VIDEO · WOODWORK · 2025</span>
-                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Keyholders</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">Six weird ways to never lose your keys again:
-                            nails, hidden magnets, LEGO and a guitar amp you can hang your keys on. Five prototypes are
-                            filmed — the magnetic board is the last build before the edit.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-44 overflow-hidden">
-                        <video src="assets/ringmaking.mp4" poster="assets/img/ringmaking-poster.jpg" controls preload="none" playsinline class="w-full h-full object-cover"></video>
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">CRAFT · 2025</span>
-                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Ringmaking</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">From scrap copper to carved wood to polished
-                            silver — a metalwork learning curve in three rings. The first ring's build is on film —
-                            press play above.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-56 overflow-hidden">
-                        <img src="assets/img/curiositycorner.jpg" alt="Vintage-style poster reading Curiosity Corner"
-                            width="1024" height="1024" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">COMMUNITY · 2025</span>
-                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">CuriosityCorner</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A living-room talk night where everyone
-                            brings five minutes on something they love — ramen science, baby names, pressure cookers,
-                            dream kitchens. Three editions in; the format waits for its next invite.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-48 overflow-hidden">
-                        <img src="assets/img/modularflavour.jpg" alt="Ramen flowchart page from the generated cookbook"
-                            width="1312" height="900" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">FOOD · DESIGN · 2026</span>
-                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">ModularFlavour</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A cookbook built like a modular synth:
-                            recipes are components — sauces, broths, breads — that patch together into dishes, generated
-                            and typeset into a finished book. v1 is shipped; book two is the current focus.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-60 overflow-hidden">
-                        <img src="assets/img/portable-sunrise.jpg"
-                            alt="Portable Sunrise prototype: ESP32 and addressable LED strip wired on a breadboard"
-                            width="1600" height="2134" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · 2025</span>
-                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Portable Sunrise</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A cube-shaped wake-up light around an ESP32
-                            and an LED strip: a 30-minute sunrise alarm, five brightness levels, colour modes and a
-                            battery that behaves. Electronics prototyped; the enclosure is the next step.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-52 overflow-hidden">
-                        <img src="assets/img/shoji-lamp.jpg"
-                            alt="Shoji-style table lamp glowing with a 3D-printed koi and dragon light panel"
-                            width="1600" height="2400" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">WOODWORK · 2026</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Shoji lamp</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A Japanese-style lantern: wooden frame,
-                            translucent 3D-printed koi-and-dragon light panels, warm light and very patient glue-ups.
-                            Built, glowing, and called done.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <div class="card-placeholder h-44 flex items-center justify-center">
-                        <span class="font-display" style="font-size: 104px;">E</span>
-                    </div>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2021</span>
-                            <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Escaperooms</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">Hand-built escape rooms for birthdays:
-                            string-traced world maps, chord-chart ciphers and story-driven locks that actually open.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-56 overflow-hidden">
-                        <img src="assets/img/espresso.jpg"
-                            alt="Yellow Rancilio Silvia espresso machine on the kitchen counter with grinder and kettle"
-                            width="1600" height="1066" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">COFFEE · 3D PRINT · 2025</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Espresso machine mods</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A Rancilio Silvia in workshop yellow: ESP32
-                            sensors, a printed steam knob and drip-tray float, and a single-dose mod for the Sage
-                            grinder. Espresso by engineering.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-64 overflow-hidden">
-                        <img src="assets/img/pickguardjbass.jpg"
-                            alt="Yellow Jazz Bass on a stand with a white 3D-printed pickguard showing a black sun and moon motif"
-                            width="1600" height="2400" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">MUSIC · CRAFT · 2025</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Pickguard JBass</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A pickguard for the Jazz Bass, designed in
-                            CAD and printed white with a black sun-and-moon motif — nine revisions from template to
-                            fitting. Now standard equipment on the yellow body.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-64 overflow-hidden">
-                        <img src="assets/img/multiplicationapp.jpg"
-                            alt="Phone screenshot of the multiplication app showing 68 × 76 with a green OK button"
-                            width="1080" height="2340" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">APP · CODE · 2026</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Multiplication App</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A native Android multiplication drill in 45
-                            lines of Java: two random numbers, one green OK button. Tap to check, tap again for the next
-                            pair — no ads, no framework, no fuss.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-56 overflow-hidden">
-                        <img src="assets/img/series7.jpg"
-                            alt="Yellow Series 7 chair with a black-and-copper marbled seat, next to a blue and a green chair"
-                            width="1600" height="2134" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · FURNITURE ·
-                                2026</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Series 7 chair</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">Arne Jacobsen's Series 7 chairs, refreshed
-                            with 3D-printed parts — yellow foot caps and printed fittings modelled from the original
-                            geometry. Three chairs done.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-40 overflow-hidden">
-                        <img src="assets/img/myfirstalbum.jpg"
-                            alt="White album cover with a blue handwritten signature — Miró, 2022" width="1600"
-                            height="1600" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">MUSIC · 2022</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">First album</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">'Miró — Miró' (2022): nine songs written,
-                            played and mixed at home, self-released with a signature-only cover. The first album — done
-                            enough to call done.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-52 overflow-hidden">
-                        <img src="assets/img/bikehandlebarends.jpg"
-                            alt="Close-up of the commuter's snowy handlebar with the printed yellow bar end" width="740"
-                            height="360" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · 2025</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Bike handlebar ends</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">Printed bar ends for the yellow commuter —
-                            modelled, printed, installed and ridden daily. Small part, finished cockpit.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <div class="card-placeholder h-44 flex items-center justify-center">
-                        <span class="font-display" style="font-size: 104px;">Y</span>
-                    </div>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">3D PRINT · AUDIO · 2025</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">Yamaha HS7 covers</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">3D-printed covers for the Yamaha HS7
-                            monitors, designed around the cabinets and printed to fit exactly. Photogenic enough to
-                            deserve a real photo soon.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-56 overflow-hidden">
-                        <img src="assets/img/plantenbewateraar.jpg"
-                            alt="Spider plant hanging by the window — the plant the waterer keeps alive" width="1600"
-                            height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · GARDEN ·
-                                2022</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">PlantenBewateraar</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">An ESP32 watching the plants: two moisture
-                            sensors plus temperature and light on a loop, two pumps that only fire when the soil asks —
-                            readings streamed to a Google Sheet. On duty ever since.</p>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-52 overflow-hidden">
-                        <img src="assets/img/dnd-eric.jpg"
-                            alt="AI-generated portrait of Nyx, the painted cat-dragon bard character, wearing a pink beret"
-                            width="768" height="1344" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
-                            <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">D&D: Eric's campaign</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">A campaign built for Eric's table: character
-                            sheets, AI-generated portraits and an intro film — Nyx's sheet alone has been revised every
-                            few months since 2024.</p>
-                        <a href="https://dnd-championship-festival.netlify.app/mechanics/the%20champion%20festival%20challenges"
-                            target="_blank" rel="noopener"
-                            class="mt-gutter inline-flex items-center gap-1 font-body-md text-body-md text-ink hover:text-secondary transition-colors">
-                            <span>Championship Festival mechanics</span>
-                            <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="masonry-item project-card">
-                    <figure class="h-52 overflow-hidden">
-                        <img src="assets/img/dnd-lucas.jpg"
-                            alt="The Faerûn campaign map from Lucas's campaign shown on the TV at the table"
-                            width="1600" height="730" loading="lazy" decoding="async"
-                            class="w-full h-full object-cover">
-                    </figure>
-                    <div class="p-gutter">
-                        <div class="flex items-center justify-between gap-unit mb-4">
-                            <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
-                            <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md mb-3">D&D: Lucas's campaign</h3>
-                        <p class="font-body-md text-body-md text-ink-soft">The 2023 campaign for Lucas's group — Haldor
-                            the dwarf cleric, printable spell sheets and a stack of session photos and clips. Wrapped
-                            and archived.</p>
-                    </div>
-                </article>
-
-                <a href="spirograph/spirograph.html" target="_blank" rel="noopener"
-                    title="Open the Spirograph simulator" class="block group">
-                    <article class="masonry-item project-card project-link">
+                    <article class="masonry-item project-card">
                         <figure class="h-64 overflow-hidden">
-                            <img src="assets/img/spirograph.jpg"
-                                alt="Screenshot of the Spirograph simulator: a violet gear-drawing curve tracing itself on a dark canvas with parameter sliders"
-                                width="903" height="1956" loading="lazy" decoding="async"
+                            <img src="assets/img/keyholders.jpg"
+                                alt="Wooden board with magnetic key holders and keys hanging on it" width="1600"
+                                height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">VIDEO · WOODWORK ·
+                                    2025</span>
+                                <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Keyholders</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">Six weird ways to never lose your keys
+                                again:
+                                nails, hidden magnets, LEGO and a guitar amp you can hang your keys on. Five prototypes
+                                are
+                                filmed — the magnetic board is the last build before the edit.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-44 overflow-hidden">
+                            <video src="assets/ringmaking.mp4" poster="assets/img/ringmaking-poster.jpg" controls
+                                preload="none" playsinline class="w-full h-full object-cover"></video>
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">CRAFT · 2025</span>
+                                <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Ringmaking</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">From scrap copper to carved wood to
+                                polished
+                                silver — a metalwork learning curve in three rings. The first ring's build is on film —
+                                press play above.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-56 overflow-hidden">
+                            <img src="assets/img/curiositycorner.jpg"
+                                alt="Vintage-style poster reading Curiosity Corner" width="1024" height="1024"
+                                loading="lazy" decoding="async" class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">COMMUNITY · 2025</span>
+                                <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">CuriosityCorner</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A living-room talk night where everyone
+                                brings five minutes on something they love — ramen science, baby names, pressure
+                                cookers,
+                                dream kitchens. Three editions in; the format waits for its next invite.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-48 overflow-hidden">
+                            <img src="assets/img/modularflavour.jpg"
+                                alt="Ramen flowchart page from the generated cookbook" width="1312" height="900"
+                                loading="lazy" decoding="async" class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">FOOD · DESIGN · 2026</span>
+                                <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">ModularFlavour</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A cookbook built like a modular synth:
+                                recipes are components — sauces, broths, breads — that patch together into dishes,
+                                generated
+                                and typeset into a finished book. v1 is shipped; book two is the current focus.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-60 overflow-hidden">
+                            <img src="assets/img/portable-sunrise.jpg"
+                                alt="Portable Sunrise prototype: ESP32 and addressable LED strip wired on a breadboard"
+                                width="1600" height="2134" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
-                                <span class="font-label-caps text-label-caps text-secondary">CODE · ART · 2026</span>
-                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                                <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · 2025</span>
+                                <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
                             </div>
-                            <h3 class="font-headline-md text-headline-md mb-3">Spirograph</h3>
-                            <p class="font-body-md text-body-md text-ink-soft">Classic gear drawing, reimagined in code —
-                                dial in the outer radius, the gear and the pen distance, then watch the curve trace
-                                itself. Click the card to draw your own.</p>
+                            <h3 class="font-headline-md text-headline-md mb-3">Portable Sunrise</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A cube-shaped wake-up light around an
+                                ESP32
+                                and an LED strip: a 30-minute sunrise alarm, five brightness levels, colour modes and a
+                                battery that behaves. Electronics prototyped; the enclosure is the next step.</p>
                         </div>
                     </article>
-                </a>
 
-                <a href="https://miromissotten.github.io/CafeWriting/" target="_blank" rel="noopener"
-                    title="Open the Cafe Writing mockup" class="block">
-                    <article class="masonry-item project-card project-link">
-                        <figure class="h-64 overflow-hidden">
-                            <img src="assets/img/cafewriting.svg"
-                                alt="Cafe Writing concept illustration — a quote card in a swipe stack on warm paper"
-                                width="900" height="1200" loading="lazy" decoding="async"
+                    <article class="masonry-item project-card">
+                        <figure class="h-52 overflow-hidden">
+                            <img src="assets/img/shoji-lamp.jpg"
+                                alt="Shoji-style table lamp glowing with a 3D-printed koi and dragon light panel"
+                                width="1600" height="2400" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
-                                <span class="font-label-caps text-label-caps text-secondary">PRODUCT · WEB · 2026</span>
+                                <span class="font-label-caps text-label-caps text-secondary">WOODWORK · GRAPHICS · 2026</span>
                                 <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
                             </div>
-                            <h3 class="font-headline-md text-headline-md mb-3">Cafe Writing</h3>
-                            <p class="font-body-md text-body-md text-ink-soft">Café reading corners, reimagined: readers
-                                swipe poems and stories one at a time, a curator moderates, the barista prints the
-                                night's cards. A live client mockup — click to browse the whole flow.</p>
+                            <h3 class="font-headline-md text-headline-md mb-3">Shoji lamp</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A Japanese-style lantern: wooden frame,
+                                translucent 3D-printed koi-and-dragon light panels, warm light and very patient
+                                glue-ups.
+                                Built, glowing, and called done.</p>
                         </div>
                     </article>
-                </a>
-            </div>
-            <div class="carousel-floor" aria-hidden="true"></div>
-                <p class="text-center font-body-md text-body-md carousel-caption" id="carousel-caption"
-                    aria-live="polite">Keyholders</p>
-                <p class="text-center font-caption text-caption carousel-caption-sub" id="carousel-subcaption">VIDEO ·
-                    WOODWORK · 2025</p>
+
+                    <article class="masonry-item project-card">
+                        <div class="card-placeholder h-44 flex items-center justify-center">
+                            <span class="font-display" style="font-size: 104px;">E</span>
+                        </div>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2021</span>
+                                <span class="chip chip-resting"><span class="dot"></span>RESTING</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Escaperooms</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">Hand-built escape rooms for birthdays:
+                                string-traced world maps, chord-chart ciphers and story-driven locks that actually open.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-56 overflow-hidden">
+                            <img src="assets/img/espresso.jpg"
+                                alt="Yellow Rancilio Silvia espresso machine on the kitchen counter with grinder and kettle"
+                                width="1600" height="1066" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">COFFEE · 3D PRINT ·
+                                    2025</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Espresso machine mods</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A Rancilio Silvia in workshop yellow:
+                                ESP32
+                                sensors, a printed steam knob and drip-tray float, and a single-dose mod for the Sage
+                                grinder. Espresso by engineering.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-64 overflow-hidden">
+                            <img src="assets/img/pickguardjbass.jpg"
+                                alt="Yellow Jazz Bass on a stand with a white 3D-printed pickguard showing a black sun and moon motif"
+                                width="1600" height="2400" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">MUSIC · CRAFT · 2025</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Pickguard JBass</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A pickguard for the Jazz Bass, designed
+                                in
+                                CAD and printed white with a black sun-and-moon motif — nine revisions from template to
+                                fitting. Now standard equipment on the yellow body.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-64 overflow-hidden">
+                            <img src="assets/img/multiplicationapp.jpg"
+                                alt="Phone screenshot of the multiplication app showing 68 × 76 with a green OK button"
+                                width="1080" height="2340" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">APP · CODE · 2026</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Multiplication App</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A native Android multiplication drill in
+                                45
+                                lines of Java: two random numbers, one green OK button. Tap to check, tap again for the
+                                next
+                                pair — no ads, no framework, no fuss.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-56 overflow-hidden">
+                            <img src="assets/img/series7.jpg"
+                                alt="Yellow Series 7 chair with a black-and-copper marbled seat, next to a blue and a green chair"
+                                width="1600" height="2134" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">3D PRINT · FURNITURE ·
+                                    2026</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Series 7 chair</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">Arne Jacobsen's Series 7 chairs,
+                                refreshed
+                                with 3D-printed parts — yellow foot caps and printed fittings modelled from the original
+                                geometry. Three chairs done.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-40 overflow-hidden">
+                            <img src="assets/img/myfirstalbum.jpg"
+                                alt="White album cover with a blue handwritten signature — Miró, 2022" width="1600"
+                                height="1600" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">MUSIC · 2022</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">First album</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">'Miró — Miró' (2022): nine songs written,
+                                played and mixed at home, self-released with a signature-only cover. The first album —
+                                done
+                                enough to call done.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-52 overflow-hidden">
+                            <img src="assets/img/bikehandlebarends.jpg"
+                                alt="Close-up of the commuter's snowy handlebar with the printed yellow bar end"
+                                width="740" height="360" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">3D PRINT · 2025</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Bike handlebar ends</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">Printed bar ends for the yellow commuter
+                                —
+                                modelled, printed, installed and ridden daily. Small part, finished cockpit.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <div class="card-placeholder h-44 flex items-center justify-center">
+                            <span class="font-display" style="font-size: 104px;">Y</span>
+                        </div>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">3D PRINT · AUDIO ·
+                                    2025</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">Yamaha HS7 covers</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">3D-printed covers for the Yamaha HS7
+                                monitors, designed around the cabinets and printed to fit exactly. Photogenic enough to
+                                deserve a real photo soon.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-56 overflow-hidden">
+                            <img src="assets/img/plantenbewateraar.jpg"
+                                alt="Spider plant hanging by the window — the plant the waterer keeps alive"
+                                width="1600" height="2134" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">ELECTRONICS · GARDEN ·
+                                    2022</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">PlantenBewateraar</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">An ESP32 watching the plants: two
+                                moisture
+                                sensors plus temperature and light on a loop, two pumps that only fire when the soil
+                                asks —
+                                readings streamed to a Google Sheet. On duty ever since.</p>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-52 overflow-hidden">
+                            <img src="assets/img/dnd-eric.jpg"
+                                alt="AI-generated portrait of Nyx, the painted cat-dragon bard character, wearing a pink beret"
+                                width="768" height="1344" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
+                                <span class="chip chip-active"><span class="dot"></span>ACTIVE</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">D&D: Eric's campaign</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">A campaign built for Eric's table:
+                                character
+                                sheets, AI-generated portraits and an intro film — Nyx's sheet alone has been revised
+                                every
+                                few months since 2024.</p>
+                            <a href="https://dnd-championship-festival.netlify.app/mechanics/the%20champion%20festival%20challenges"
+                                target="_blank" rel="noopener"
+                                class="mt-gutter inline-flex items-center gap-1 font-body-md text-body-md text-ink hover:text-secondary transition-colors">
+                                <span>Championship Festival mechanics</span>
+                                <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="masonry-item project-card">
+                        <figure class="h-52 overflow-hidden">
+                            <img src="assets/img/dnd-lucas.jpg"
+                                alt="The Faerûn campaign map from Lucas's campaign shown on the TV at the table"
+                                width="1600" height="730" loading="lazy" decoding="async"
+                                class="w-full h-full object-cover">
+                        </figure>
+                        <div class="p-gutter">
+                            <div class="flex items-center justify-between gap-unit mb-4">
+                                <span class="font-label-caps text-label-caps text-secondary">GAME DESIGN · 2023</span>
+                                <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md mb-3">D&D: Lucas's campaign</h3>
+                            <p class="font-body-md text-body-md text-ink-soft">The 2023 campaign for Lucas's group —
+                                Haldor
+                                the dwarf cleric, printable spell sheets and a stack of session photos and clips.
+                                Wrapped
+                                and archived.</p>
+                        </div>
+                    </article>
+
+                    <a href="spirograph/spirograph.html" target="_blank" rel="noopener"
+                        title="Open the Spirograph simulator" class="block group">
+                        <article class="masonry-item project-card project-link">
+                            <figure class="h-64 overflow-hidden">
+                                <img src="assets/img/spirograph.jpg"
+                                    alt="Screenshot of the Spirograph simulator: a violet gear-drawing curve tracing itself on a dark canvas with parameter sliders"
+                                    width="903" height="1956" loading="lazy" decoding="async"
+                                    class="w-full h-full object-cover">
+                            </figure>
+                            <div class="p-gutter">
+                                <div class="flex items-center justify-between gap-unit mb-4">
+                                    <span class="font-label-caps text-label-caps text-secondary">CODE · DEV · ART ·
+                                        2026</span>
+                                    <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                                </div>
+                                <h3 class="font-headline-md text-headline-md mb-3">Spirograph</h3>
+                                <p class="font-body-md text-body-md text-ink-soft">Classic gear drawing, reimagined in
+                                    code —
+                                    dial in the outer radius, the gear and the pen distance, then watch the curve trace
+                                    itself. Click the card to draw your own.</p>
+                            </div>
+                        </article>
+                    </a>
+
+                    <a href="https://miromissotten.github.io/CafeWriting/" target="_blank" rel="noopener"
+                        title="Open the Cafe Writing mockup" class="block">
+                        <article class="masonry-item project-card project-link">
+                            <figure class="h-64 overflow-hidden">
+                                <img src="assets/img/cafewriting.svg"
+                                    alt="Cafe Writing concept illustration — a quote card in a swipe stack on warm paper"
+                                    width="900" height="1200" loading="lazy" decoding="async"
+                                    class="w-full h-full object-cover">
+                            </figure>
+                            <div class="p-gutter">
+                                <div class="flex items-center justify-between gap-unit mb-4">
+                                    <span class="font-label-caps text-label-caps text-secondary">PRODUCT · WEB · DEV ·
+                                        2026</span>
+                                    <span class="chip chip-released"><span class="dot"></span>RELEASED</span>
+                                </div>
+                                <h3 class="font-headline-md text-headline-md mb-3">Cafe Writing</h3>
+                                <p class="font-body-md text-body-md text-ink-soft">Café reading corners, reimagined:
+                                    readers
+                                    swipe poems and stories one at a time, a curator moderates, the barista prints the
+                                    night's cards. A live client mockup — click to browse the whole flow.</p>
+                            </div>
+                        </article>
+                    </a>
+                </div>
                 <div class="mt-gutter flex items-center gap-gutter carousel-ui">
                     <button type="button" class="carousel-btn" id="carousel-prev" aria-label="Previous project"
                         aria-controls="project-carousel">
@@ -1443,86 +1540,32 @@
             </div>
         </section>
 
-        <section id="interests" class="pb-section-gap border-t border-concrete pt-section-gap">
-            <p class="font-label-caps text-label-caps text-secondary mb-gutter">INTERESTS</p>
-            <p class="font-body-md text-body-md text-ink-soft max-w-xl">The threads that keep pulling the workshop
-                forward — what I keep coming back to between projects.</p>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-gutter mt-margin-desktop">
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_wave.png" alt="Waveform mark" width="582" height="582"
-                            loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Music &amp; sound</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">My First Album started it — the piano keeps it
-                        going. If it hums, I'm interested.</p>
-                </article>
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_dashboard.png" alt="Dashboard mark" width="458" height="458"
-                            loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Interfaces</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">Shoji Lamp and Portable Sunrise are interfaces
-                        too — UI in wood and light.</p>
-                </article>
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_analytics.png" alt="Analytics mark" width="486" height="486"
-                            loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Data &amp; analytics</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">Multiplication App and Café Writing live on
-                        numbers, streaks and habits.</p>
-                </article>
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_automation.png" alt="Automation mark" width="443" height="443"
-                            loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Automation</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">The Plantenbewateraar waters the plants so I
-                        don't have to remember.</p>
-                </article>
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_visualisation.png" alt="Visualisation mark" width="483"
-                            height="483" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Visualisation</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">Spirograph — geometry turned into pictures,
-                        one pen at a time.</p>
-                </article>
-                <article class="project-card p-gutter">
-                    <figure class="h-40 md:h-48 flex items-center justify-center overflow-hidden mb-unit bg-ink">
-                        <img src="assets/branding/logo_project_management.png" alt="Project management mark" width="373"
-                            height="373" loading="lazy" class="max-h-full max-w-full object-contain">
-                    </figure>
-                    <h3 class="font-headline-md text-headline-md mb-unit">Making plans</h3>
-                    <p class="font-body-md text-body-md text-ink-soft">D&amp;D campaigns run on preparation, maps and
-                        initiative orders.</p>
-                </article>
-            </div>
-        </section>
-
         <section id="contact" class="border-t border-concrete pt-section-gap">
             <p class="font-label-caps text-label-caps text-secondary mb-gutter">CONTACT</p>
             <h2 class="font-headline-lg text-headline-lg max-w-2xl mb-gutter">Say ciaociao — or hallo.</h2>
             <div class="flex flex-wrap items-center gap-4 mt-margin-desktop">
                 <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
                     aria-label="YouTube — youtube.com/@miromis" class="social-circle">
-                    <svg class="icon-32" aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                    <svg class="icon-32" aria-hidden="true">
+                        <use href="#icon-youtube"></use>
+                    </svg>
                 </a>
                 <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
                     aria-label="GitHub — github.com/miromissotten" class="social-circle">
-                    <svg class="icon-32" aria-hidden="true"><use href="#icon-github"></use></svg>
+                    <svg class="icon-32" aria-hidden="true">
+                        <use href="#icon-github"></use>
+                    </svg>
                 </a>
                 <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
                     aria-label="LinkedIn — linkedin.com/in/miromissotten" class="social-circle">
-                    <svg class="icon-32" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                    <svg class="icon-32" aria-hidden="true">
+                        <use href="#icon-linkedin"></use>
+                    </svg>
                 </a>
                 <button type="button" id="onlyfans-link" aria-label="OnlyFans easter egg" class="social-circle">
-                    <svg class="icon-onlyfans-word" aria-hidden="true"><use href="#icon-onlyfans-word"></use></svg>
+                    <svg class="icon-onlyfans-word" aria-hidden="true">
+                        <use href="#icon-onlyfans-word"></use>
+                    </svg>
                 </button>
             </div>
             <p class="font-caption text-caption text-secondary/70 mt-6">email slot reserved — arriving with v1.1</p>
@@ -1544,7 +1587,8 @@
                 <div class="fan-stage">
                     <div class="fan-face">
                         <div class="fan-blades">
-                            <span class="fan-blade"></span><span class="fan-blade"></span><span class="fan-blade"></span>
+                            <span class="fan-blade"></span><span class="fan-blade"></span><span
+                                class="fan-blade"></span>
                         </div>
                         <div class="fan-guard"></div>
                         <div class="fan-hub"></div>
@@ -1568,7 +1612,8 @@
                 d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
         </symbol>
         <symbol id="icon-linkedin" viewBox="0 0 24 24">
-            <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+            <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="5" fill="none" stroke="currentColor"
+                stroke-width="1.8" />
             <text x="12" y="15.5" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor"
                 style="font-family: 'Hanken Grotesk', sans-serif">in</text>
         </symbol>
@@ -1593,7 +1638,7 @@
                 concrete: "#DCD7C8", concreteRgb: "220 215 200",
                 graphite: "#1F1C57", graphiteRgb: "31 28 87",
                 secondary: "#1F1C57", secondaryRgb: "31 28 87",
-                accent: "#F8E666", accentRgb: "248 230 102",
+                accent: "#fbbf24", accentRgb: "251 191 36",
                 accentPink: "#FFC7F0", accentPinkRgb: "255 199 240",
                 accentGreen: "#105639", accentGreenRgb: "16 86 57",
                 shadowSoft: "0 18px 40px rgba(31, 28, 87, 0.10)",
@@ -1608,8 +1653,8 @@
                 soft: "#C7C2B2", softRgb: "199 194 178",
                 concrete: "#2E2A63", concreteRgb: "46 42 99",
                 graphite: "#C9C5B5", graphiteRgb: "201 197 181",
-                secondary: "#F8E666", secondaryRgb: "248 230 102",
-                accent: "#F8E666", accentRgb: "248 230 102",
+                secondary: "#fbbf24", secondaryRgb: "251 191 36",
+                accent: "#fbbf24", accentRgb: "251 191 36",
                 accentPink: "#FFC7F0", accentPinkRgb: "255 199 240",
                 accentGreen: "#8FB89E", accentGreenRgb: "143 184 158",
                 shadowSoft: "0 18px 40px rgba(0, 0, 0, 0.4)",
@@ -1747,6 +1792,7 @@
             var carouselCount = document.getElementById("carousel-count");
             var carouselCaption = document.getElementById("carousel-caption");
             var carouselSubcaption = document.getElementById("carousel-subcaption");
+            var carouselFilter = document.getElementById("carousel-filter");
             var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
             if (carousel && carouselPrev && carouselNext) {
                 var slides = Array.prototype.slice.call(carousel.children);
@@ -1763,6 +1809,8 @@
                 var dragStartLeft = 0;
                 var ticking = false;
                 var selected = 0;
+                var currentFilter = "all";
+                var visibleCount = cards.length;
                 function slideCenter(i) {
                     var el = slides[Math.min(Math.max(i, 0), slides.length - 1)];
                     if (!el) { return 0; }
@@ -1781,8 +1829,18 @@
                     }
                     updateCarousel();
                 }
-                carouselPrev.addEventListener("click", function () { goTo(selectedFromScroll() - 1); });
-                carouselNext.addEventListener("click", function () { goTo(selectedFromScroll() + 1); });
+                carouselPrev.addEventListener("click", function () {
+                    var cur = selectedFromScroll();
+                    for (var i = cur - 1; i >= 0; i--) {
+                        if (slides[i].style.display !== "none") { goTo(i); return; }
+                    }
+                });
+                carouselNext.addEventListener("click", function () {
+                    var cur = selectedFromScroll();
+                    for (var i = cur + 1; i < slides.length; i++) {
+                        if (slides[i].style.display !== "none") { goTo(i); return; }
+                    }
+                });
                 function selectedFromScroll() {
                     var center = carousel.scrollLeft + carousel.clientWidth / 2;
                     var best = 0;
@@ -1813,7 +1871,13 @@
                         carouselBar.style.width = max > 0 ? (10 + (pos / max) * 90) + "%" : "100%";
                     }
                     if (carouselCount && cards.length) {
-                        carouselCount.textContent = (selected + 1) + " / " + cards.length;
+                        var filteredIndex = 0;
+                        for (var fi = 0; fi <= selected; fi++) {
+                            if (slides[fi].style.display !== "none") {
+                                filteredIndex++;
+                            }
+                        }
+                        carouselCount.textContent = filteredIndex + " / " + visibleCount;
                     }
                     updateCaption();
                     paintCoverflow();
@@ -1856,11 +1920,89 @@
                 carousel.addEventListener("scroll", requestUpdate, { passive: true });
                 window.addEventListener("resize", requestUpdate);
                 if (reduceMotionQuery.addEventListener) { reduceMotionQuery.addEventListener("change", reduceMotionListener); }
-                updateCaption();
-                paintCoverflow();
-                updateCarousel();
-                /* default selection: first card, centred */
-                requestAnimationFrame(function () { goTo(0, true); });
+                var currentStatus = "all";
+                if (carouselFilter) {
+                    var filterButtons = carouselFilter.querySelectorAll(".carousel-filter-btn");
+                    filterButtons.forEach(function (btn) {
+                        btn.addEventListener("click", function () {
+                            var filter = btn.getAttribute("data-filter");
+                            var status = btn.getAttribute("data-status");
+                            if (filter) {
+                                currentFilter = filter;
+                                filterButtons.forEach(function (b) {
+                                    if (b.getAttribute("data-filter")) {
+                                        b.setAttribute("aria-pressed", String(b === btn));
+                                    }
+                                });
+                                applyFilter();
+                            }
+                            if (status) {
+                                currentStatus = status;
+                                filterButtons.forEach(function (b) {
+                                    if (b.getAttribute("data-status")) {
+                                        b.setAttribute("aria-pressed", String(b === btn));
+                                    }
+                                });
+                                applyFilter();
+                            }
+                        });
+                    });
+                }
+                function applyFilter() {
+                    if (!carousel) { return; }
+                    visibleCount = 0;
+                    var firstVisible = -1;
+                    var selectedIndex = -1;
+                    for (var i = 0; i < slides.length; i++) {
+                        var el = slides[i];
+                        var card = cards[i];
+                        var categoryMatch = currentFilter === "all" || (card && matchesFilter(card, currentFilter));
+                        var statusMatch = currentStatus === "all" || (card && matchesStatus(card, currentStatus));
+                        var match = categoryMatch && statusMatch;
+                        el.style.display = match ? "" : "none";
+                        if (match) {
+                            visibleCount++;
+                            if (firstVisible === -1) { firstVisible = i; }
+                            if (i === selected) { selectedIndex = i; }
+                        }
+                    }
+                    var total = visibleCount;
+                    if (carouselCount) {
+                        carouselCount.textContent = total > 0 ? ("1 / " + total) : ("0 / 0");
+                    }
+                    if (total === 0) {
+                        if (carouselPrev) { carouselPrev.disabled = true; }
+                        if (carouselNext) { carouselNext.disabled = true; }
+                        if (carousel) { carousel.scrollLeft = 0; }
+                        updateCaption();
+                        paintCoverflow();
+                        return;
+                    }
+                    var newSelected = selectedIndex >= 0 ? selectedIndex : firstVisible;
+                    if (newSelected !== selected) { selected = newSelected; }
+                    var want = slideCenter(selected);
+                    if (carousel) { carousel.scrollLeft = want; }
+                    updateCarousel();
+                }
+                function matchesFilter(card, filter) {
+                    if (!card) { return false; }
+                    var label = card.querySelector(".font-label-caps");
+                    if (!label) { return false; }
+                    var text = label.textContent.toLowerCase();
+                    var tokens = text.replace(/\s+/g, " ").split(" · ");
+                    for (var t = 0; t < tokens.length; t++) {
+                        var token = tokens[t].trim().toLowerCase();
+                        if (token.indexOf(filter) >= 0) { return true; }
+                    }
+                    return false;
+                }
+                function matchesStatus(card, status) {
+                    if (!card) { return false; }
+                    var chip = card.querySelector(".chip");
+                    if (!chip) { return false; }
+                    var text = chip.textContent.trim().toLowerCase();
+                    return text === status;
+                }
                 /* mouse drag-to-scroll (touch keeps native swipe); snap off mid-drag */
                 carousel.addEventListener("pointerdown", function (e) {
                     if (e.pointerType === "touch") { dragMoved = 0; return; }
