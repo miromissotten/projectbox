@@ -643,6 +643,37 @@
             box-shadow: var(--shadow-hover);
         }
 
+        /* sprite logos inherit currentColor — pin them to the beige paper tone
+           so they read on the near-black circles (navy ink would vanish) */
+        .social-circle svg,
+        .social-dot svg {
+            color: #F2EFED;
+        }
+
+        /* compact logo buttons for FIND THE WORK (sidebar + mobile drawer) */
+        .social-dot {
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+            background: #000508;
+            border: 1px solid var(--concrete);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+        }
+
+        .social-dot svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-dot:hover {
+            transform: translateY(-2px);
+            border-color: var(--ink);
+            box-shadow: var(--shadow-hover);
+        }
+
         /* ---- dark mode ---- */
         html.dark {
             --paper: #14122D;
@@ -729,21 +760,21 @@
         </nav>
         <div class="mt-auto pb-gutter border-t border-concrete pt-gutter">
             <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
-            <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
-                <svg class="icon-16" aria-hidden="true"><use href="#icon-youtube"></use></svg>
-                <span>youtube.com/@miromis</span>
-            </a>
-            <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
-                <svg class="icon-16" aria-hidden="true"><use href="#icon-github"></use></svg>
-                <span>github.com/miromissotten</span>
-            </a>
-            <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                class="flex items-center gap-2 font-body-md text-body-md text-ink hover:underline">
-                <svg class="icon-16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-                <span>linkedin.com/in/miromissotten</span>
-            </a>
+            <div class="flex items-center gap-3">
+                <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
+                    aria-label="YouTube — youtube.com/@miromis" title="youtube.com/@miromis" class="social-dot">
+                    <svg aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                </a>
+                <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
+                    aria-label="GitHub — github.com/miromissotten" title="github.com/miromissotten" class="social-dot">
+                    <svg aria-hidden="true"><use href="#icon-github"></use></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
+                    aria-label="LinkedIn — linkedin.com/in/miromissotten" title="linkedin.com/in/miromissotten"
+                    class="social-dot">
+                    <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                </a>
+            </div>
             <p class="font-caption text-caption text-secondary/60 mt-4">email slot reserved</p>
         </div>
     </div>
@@ -777,21 +808,22 @@
         <div class="flex flex-col gap-8">
             <div>
                 <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
-                <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
-                    <svg class="icon-16" aria-hidden="true"><use href="#icon-youtube"></use></svg>
-                    <span>youtube.com/@miromis</span>
-                </a>
-                <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
-                    <svg class="icon-16" aria-hidden="true"><use href="#icon-github"></use></svg>
-                    <span>github.com/miromissotten</span>
-                </a>
-                <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                    class="inline-flex items-center gap-2 font-caption text-caption text-ink hover:text-secondary transition-colors">
-                    <svg class="icon-16" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-                    <span>linkedin.com/in/miromissotten</span>
-                </a>
+                <div class="flex items-center gap-3">
+                    <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
+                        aria-label="YouTube — youtube.com/@miromis" title="youtube.com/@miromis" class="social-dot">
+                        <svg aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                    </a>
+                    <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
+                        aria-label="GitHub — github.com/miromissotten" title="github.com/miromissotten"
+                        class="social-dot">
+                        <svg aria-hidden="true"><use href="#icon-github"></use></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
+                        aria-label="LinkedIn — linkedin.com/in/miromissotten" title="linkedin.com/in/miromissotten"
+                        class="social-dot">
+                        <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                    </a>
+                </div>
             </div>
             <button id="theme-toggle" aria-label="Toggle dark mode"
                 class="flex items-center gap-unit w-max text-secondary hover:text-ink">
@@ -832,17 +864,18 @@
         /* the SVG splits the name on two staggered lines: Miró starts right of
            centre, Missotten starts near the left edge */
         .hero-line-1 {
-            padding-left: clamp(2rem, 34vw, 34rem);
+            padding-left: 0;
         }
 
         .hero-line-2 {
-            padding-left: clamp(0rem, 4vw, 3rem);
+            padding-left: 0;
         }
 
         .hero-watermark {
             position: absolute;
             left: -0.04em;
-            bottom: -0.14em;
+            top: 12%;
+            transform: translateY(-18%);
             font-family: "Cambria", "Georgia", "Times New Roman", serif;
             font-size: clamp(14rem, 44vw, 38rem);
             line-height: 1;
@@ -877,19 +910,6 @@
                 <span class="hero-line hero-line-2">Missotten</span>
             </h1>
             <p class="hero-tag relative z-[1]">human</p>
-            <p class="font-body-lg text-body-lg text-ink-soft max-w-xl mt-gutter relative z-[1]">
-                Lamps, cookbooks, escape rooms, videos — designed, built and filmed by one person in a small workshop.
-            </p>
-            <dl class="flex flex-wrap gap-x-section-gap gap-y-gutter mt-margin-desktop">
-                <div>
-                    <dt class="font-label-caps text-label-caps text-secondary mb-unit">MAKES</dt>
-                    <dd class="font-body-md text-body-md text-ink">lamps · videos · music · food</dd>
-                </div>
-                <div>
-                    <dt class="font-label-caps text-label-caps text-secondary mb-unit">TOOLS OF CHOICE</dt>
-                    <dd class="font-body-md text-body-md text-ink">saw · soldering iron · piano · oven</dd>
-                </div>
-            </dl>
             <div class="flex flex-wrap gap-gutter mt-margin-desktop">
                 <a href="#projects"
                     class="inline-flex items-center gap-unit bg-ink text-paper px-6 py-3 font-label-caps text-label-caps hover:bg-ink-soft transition-colors">SEE
@@ -1381,10 +1401,6 @@
         <footer
             class="mt-section-gap border-t border-concrete pt-gutter pb-4 flex flex-wrap items-center justify-between gap-gutter">
             <span class="font-caption text-caption text-secondary">© <span id="year">2026</span> Miró Missotten</span>
-            <span class="font-caption text-caption text-secondary/60">Content synced from the workshop notebook —
-                2026-09-12</span>
-            <span class="font-caption text-caption text-secondary/60">One page, no build step. View source — that's the
-                whole site.</span>
         </footer>
     </main>
 
