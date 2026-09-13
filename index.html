@@ -111,6 +111,33 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        /* Glass pill button style */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 200ms ease;
+        }
+
+        .glass-pill:active, .glass-pill:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(251, 191, 36, 0.35);
+            box-shadow: 0 0 20px -3px rgba(251, 191, 36, 0.2);
+        }
+
+        /* Ambient glow background for sidebars */
+        .ambient-glow {
+            background: radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.04) 0%, transparent 45%),
+                        radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                        #0a0e19;
+        }
+
+        /* Smooth transition presets */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         .carousel {
             position: relative;
             margin-top: 32px;
@@ -731,6 +758,18 @@
         html.dark .mobile-topbar {
             background: var(--topbar-bg, rgba(0, 5, 8, 0.92));
         }
+
+        /* Dark mode glass-pill adjustments */
+        html.dark .glass-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        html.dark .glass-pill:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 0 20px -3px rgba(251, 191, 36, 0.25);
+        }
     </style>
 </head>
 
@@ -740,113 +779,204 @@
         class="fixed inset-0 bg-ink/20 backdrop-blur-sm z-[60] hidden transition-opacity duration-300 opacity-0"></div>
 
     <div id="mobile-drawer"
-        class="fixed top-0 left-0 h-full w-80 bg-paper border-r border-concrete z-[70] -translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-margin-mobile">
-        <div class="flex justify-between items-center mb-12">
-            <span class="font-headline-md text-headline-md tracking-tighter text-ink">Miró Missotten</span>
-            <button id="close-drawer" class="p-2 -mr-2 text-ink hover:text-secondary transition-colors"
+        class="fixed top-0 left-0 h-full w-80 bg-midnight-900 border-r border-white/10 z-[70] -translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 backdrop-blur-sm">
+        <!-- Available status indicator -->
+        <div class="flex items-center gap-2 mb-4">
+            <span class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-[10px] font-mono tracking-wide text-emerald-400 bg-emerald-950/60 border border-emerald-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                AVAILABLE FOR PROJECTS
+            </span>
+        </div>
+        <!-- Branding -->
+        <div class="flex justify-between items-center mb-10">
+            <span class="font-headline-md text-headline-md tracking-tighter text-white">Miró Missotten</span>
+            <button id="close-drawer" class="p-2 -mr-2 text-slate-300 hover:text-amber-400 transition-colors"
                 aria-label="Close menu">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
-        <nav class="flex flex-col gap-6">
+        <!-- Main Navigation -->
+        <nav class="flex flex-col gap-1">
             <a href="#index" data-section="index"
-                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INDEX</a>
+                class="group relative flex items-center justify-between py-3 text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono text-amber-400/60">01</span>
+                    <span class="uppercase font-semibold tracking-widest text-amber-300 border-b border-amber-400/60 pb-0.5">INDEX</span>
+                </div>
+            </a>
             <a href="#projects" data-section="projects"
-                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">PROJECTS</a>
+                class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">02</span>
+                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">PROJECTS</span>
+                </div>
+            </a>
             <a href="#interests" data-section="interests"
-                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INTERESTS</a>
+                class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">03</span>
+                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">INTERESTS</span>
+                </div>
+            </a>
             <a href="#contact" data-section="contact"
-                class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">CONTACT</a>
+                class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">04</span>
+                    <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">CONTACT</span>
+                </div>
+            </a>
         </nav>
-        <div class="mt-auto pb-gutter border-t border-concrete pt-gutter">
-            <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
-            <div class="flex items-center gap-3">
-                <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                    aria-label="YouTube — youtube.com/@miromis" title="youtube.com/@miromis" class="social-dot">
-                    <svg aria-hidden="true"><use href="#icon-youtube"></use></svg>
-                </a>
-                <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                    aria-label="GitHub — github.com/miromissotten" title="github.com/miromissotten" class="social-dot">
-                    <svg aria-hidden="true"><use href="#icon-github"></use></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                    aria-label="LinkedIn — linkedin.com/in/miromissotten" title="linkedin.com/in/miromissotten"
-                    class="social-dot">
-                    <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
-                </a>
+        <!-- Footer with socials and theme toggle -->
+        <div class="mt-auto pt-6 border-t border-white/10">
+            <div class="mb-6">
+                <div class="font-label-caps text-label-caps text-amber-400/90 mb-4 flex items-center gap-2">
+                    FIND THE WORK
+                    <span class="h-[1px] flex-1 bg-white/10"></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <!-- YouTube -->
+                    <a aria-label="YouTube Channel" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                        </svg>
+                    </a>
+                    <!-- GitHub -->
+                    <a aria-label="GitHub Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://github.com/miromissotten" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a aria-label="LinkedIn Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <p class="font-caption text-caption text-secondary/60 mt-4">email slot reserved</p>
+            <!-- Theme Toggle -->
+            <button id="theme-toggle-btn"
+                class="group inline-flex items-center gap-3 text-amber-400/90 hover:text-amber-300 transition-colors py-1 w-max">
+                <svg class="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" x2="12" y1="1" y2="3"></line>
+                    <line x1="12" x2="12" y1="21" y2="23"></line>
+                    <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+                    <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+                    <line x1="1" x2="3" y1="12" y2="12"></line>
+                    <line x1="21" x2="23" y1="12" y2="12"></line>
+                    <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+                    <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+                </svg>
+                <span class="font-mono text-xs tracking-widest uppercase font-medium">SWITCH LIGHTS</span>
+            </button>
         </div>
     </div>
 
     <div
-        class="mobile-topbar fixed top-0 inset-x-0 z-40 md:hidden flex items-center justify-between px-margin-mobile py-4 border-b border-concrete">
-        <span class="font-headline-md text-headline-md tracking-tighter text-ink">Miró Missotten</span>
-        <button id="open-drawer" class="p-2 -mr-2 text-ink hover:text-secondary transition-colors"
+        class="mobile-topbar fixed top-0 inset-x-0 z-40 md:hidden flex items-center justify-between px-margin-mobile py-4 border-b border-white/10 bg-midnight-900/90 backdrop-blur-sm">
+        <span class="font-headline-md text-headline-md tracking-tighter text-white">Miró Missotten</span>
+        <button id="open-drawer" class="p-2 -mr-2 text-slate-300 hover:text-amber-400 transition-colors"
             aria-label="Open menu">
-            <span class="material-symbols-outlined">menu</span>
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
         </button>
     </div>
 
     <aside
-        class="hidden md:flex sticky top-0 h-screen w-72 shrink-0 flex-col justify-between border-r border-concrete px-gutter py-margin-desktop">
+        class="hidden md:flex sticky top-0 h-screen w-72 shrink-0 flex-col justify-between border-r border-white/10 px-8 py-8 bg-midnight-900 backdrop-blur-sm">
         <div>
+            <!-- Available status indicator -->
+            <div class="flex items-center gap-2 mb-4">
+                <span class="inline-flex items-center gap-1.5 py-0.5 px-2.5 rounded-full text-[10px] font-mono tracking-wide text-emerald-400 bg-emerald-950/60 border border-emerald-500/20">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    AVAILABLE FOR PROJECTS
+                </span>
+            </div>
             <a href="#index"
-                class="font-headline-md text-headline-md tracking-tighter text-ink block mb-12 hover:text-secondary transition-colors">Miró
+                class="font-headline-md text-headline-md tracking-tighter text-white block mb-12 hover:text-amber-400 transition-colors">Miró
                 Missotten</a>
-            <nav class="flex flex-col gap-5">
+            <nav class="flex flex-col gap-1">
                 <a href="#index" data-section="index"
-                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INDEX</a>
+                    class="group relative flex items-center justify-between py-3 text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-mono text-amber-400/60">01</span>
+                        <span class="uppercase font-semibold tracking-widest text-amber-300 border-b border-amber-400/60 pb-0.5">INDEX</span>
+                    </div>
+                </a>
                 <a href="#projects" data-section="projects"
-                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">PROJECTS</a>
+                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">02</span>
+                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">PROJECTS</span>
+                    </div>
+                </a>
                 <a href="#interests" data-section="interests"
-                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">INTERESTS</a>
+                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">03</span>
+                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">INTERESTS</span>
+                    </div>
+                </a>
                 <a href="#contact" data-section="contact"
-                    class="nav-link font-label-caps text-label-caps text-secondary hover:text-ink transition-colors w-max">CONTACT</a>
+                    class="group relative flex items-center justify-between py-3 text-slate-300 hover:text-amber-400 font-sans tracking-widest text-lg font-medium transition-colors">
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-mono text-slate-600 group-hover:text-amber-400/60 transition-colors">04</span>
+                        <span class="uppercase font-semibold tracking-widest group-hover:translate-x-1 transition-transform duration-200">CONTACT</span>
+                    </div>
+                </a>
             </nav>
         </div>
         <div class="flex flex-col gap-8">
             <div>
-                <div class="font-label-caps text-label-caps text-secondary mb-unit">FIND THE WORK</div>
+                <div class="font-label-caps text-label-caps text-amber-400/90 mb-4 flex items-center gap-2">
+                    FIND THE WORK
+                    <span class="h-[1px] flex-1 bg-white/10"></span>
+                </div>
                 <div class="flex items-center gap-3">
-                    <a href="https://www.youtube.com/@miromis" target="_blank" rel="noopener"
-                        aria-label="YouTube — youtube.com/@miromis" title="youtube.com/@miromis" class="social-dot">
-                        <svg aria-hidden="true"><use href="#icon-youtube"></use></svg>
+                    <!-- YouTube -->
+                    <a aria-label="YouTube Channel" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.youtube.com/@miromis" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+                        </svg>
                     </a>
-                    <a href="https://github.com/miromissotten" target="_blank" rel="noopener"
-                        aria-label="GitHub — github.com/miromissotten" title="github.com/miromissotten"
-                        class="social-dot">
-                        <svg aria-hidden="true"><use href="#icon-github"></use></svg>
+                    <!-- GitHub -->
+                    <a aria-label="GitHub Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://github.com/miromissotten" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+                        </svg>
                     </a>
-                    <a href="https://www.linkedin.com/in/miromissotten/" target="_blank" rel="noopener"
-                        aria-label="LinkedIn — linkedin.com/in/miromissotten" title="linkedin.com/in/miromissotten"
-                        class="social-dot">
-                        <svg aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+                    <!-- LinkedIn -->
+                    <a aria-label="LinkedIn Profile" class="glass-pill w-12 h-12 rounded-full flex items-center justify-center text-slate-300 hover:text-amber-400 transition-all duration-200 group" href="https://www.linkedin.com/in/miromissotten/" rel="noopener" target="_blank">
+                        <svg class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.62 1.62 0 1 0 0 3.25 1.62 1.62 0 0 0 0-3.25z"></path>
+                        </svg>
                     </a>
                 </div>
             </div>
-            <button id="theme-toggle" aria-label="Toggle dark mode"
-                class="flex items-center gap-unit w-max text-secondary hover:text-ink">
-                <span class="material-symbols-outlined icon-moon">dark_mode</span>
-                <span class="material-symbols-outlined icon-sun hidden">light_mode</span>
-                <span class="font-label-caps text-label-caps">SWITCH LIGHTS</span>
+            <!-- Theme Toggle -->
+            <button id="theme-toggle"
+                class="group inline-flex items-center gap-3 text-amber-400/90 hover:text-amber-300 transition-colors py-1 w-max">
+                <svg class="w-5 h-5 text-amber-400 group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" x2="12" y1="1" y2="3"></line>
+                    <line x1="12" x2="12" y1="21" y2="23"></line>
+                    <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+                    <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+                    <line x1="1" x2="3" y1="12" y2="12"></line>
+                    <line x1="21" x2="23" y1="12" y2="12"></line>
+                    <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+                    <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+                </svg>
+                <span class="font-mono text-xs tracking-widest uppercase font-medium">SWITCH LIGHTS</span>
             </button>
         </div>
     </aside>
 
     <style>
-        html.dark .icon-moon {
-            display: none;
-        }
-
-        html.dark .icon-sun {
-            display: inline-block;
-        }
-
-        html:not(.dark) .icon-sun {
-            display: none;
-        }
-
         /* ---- hero typographic layout, based on assets/branding/heropage.svg ---- */
         .hero-name {
             font-family: "Cambria", "Georgia", "Times New Roman", serif;
@@ -1542,6 +1672,16 @@
                 try { localStorage.setItem("theme", mode); } catch (e) { }
             });
 
+            // Also handle mobile drawer theme toggle button
+            var mobileThemeToggle = document.getElementById("theme-toggle-btn");
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener("click", function () {
+                    var mode = root.classList.contains("dark") ? "light" : "dark";
+                    applyTheme(mode);
+                    try { localStorage.setItem("theme", mode); } catch (e) { }
+                });
+            }
+
             /* ---- mobile drawer ---- */
             var drawer = document.getElementById("mobile-drawer");
             var overlay = document.getElementById("mobile-drawer-overlay");
@@ -1563,7 +1703,7 @@
             });
 
             /* ---- scrollspy ---- */
-            var links = document.querySelectorAll(".nav-link");
+            var links = document.querySelectorAll(".group[data-section]");
             var sections = document.querySelectorAll("main section[id]");
             var spy = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
