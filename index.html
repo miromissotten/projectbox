@@ -80,6 +80,8 @@
             --accent-green-rgb: 16 86 57;
             --shadow-soft: 0 18px 40px rgba(31, 28, 87, 0.10);
             --shadow-hover: 0 24px 48px rgba(31, 28, 87, 0.16);
+            --nav-bg: rgba(242, 239, 237, 0.85);
+            --topbar-bg: rgba(242, 239, 237, 0.85);
         }
 
         html,
@@ -224,22 +226,33 @@
         }
 
         /* controls row under the stage — site palette, not a black bar */
-        .carousel-ui {
-            padding-left: max(16px, calc((100% - 1280px) / 2 + 64px));
-            padding-right: max(16px, calc((100% - 1280px) / 2 + 64px));
-            color: var(--ink);
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 0 max(16px, calc((100% - 1280px) / 2 + 64px));
+        }
+
+        .carousel-controls-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .carousel-filter {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 0 4px;
+            display: none;
         }
 
         .carousel-filter-label {
-            font-size: 11px;
-            letter-spacing: 0.18em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--ink-soft);
         }
@@ -279,14 +292,6 @@
         .carousel-filter-btn:focus-visible {
             outline: 2px solid var(--ink);
             outline-offset: 2px;
-        }
-
-        .carousel-ui .carousel-caption {
-            color: var(--ink);
-        }
-
-        .carousel-ui .carousel-caption-sub {
-            color: var(--ink-soft);
         }
 
         .carousel-btn {
@@ -332,6 +337,27 @@
             width: 10%;
             background: var(--ink);
             border-radius: 9999px;
+        }
+
+        /* responsive: stack controls on narrow screens */
+        @media (max-width: 767px) {
+            .carousel-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .carousel-controls-group {
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+            }
+            .carousel-filter-row {
+                flex: 1;
+                justify-content: flex-start;
+            }
+            .carousel-nav {
+                justify-content: center;
+            }
         }
 
         nav,
@@ -772,6 +798,8 @@
             --accent-green-rgb: 143 184 158;
             --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.4);
             --shadow-hover: 0 24px 48px rgba(0, 0, 0, 0.5);
+            --nav-bg: rgba(20, 18, 45, 0.92);
+            --topbar-bg: rgba(20, 18, 45, 0.92);
         }
 
         html.dark body {
@@ -816,6 +844,67 @@
             background: rgba(255, 255, 255, 0.07);
             border-color: rgba(251, 191, 36, 0.4);
             box-shadow: 0 0 20px -3px rgba(251, 191, 36, 0.25);
+        }
+
+        /* ---- utility ---- */
+        .mt-2 { margin-top: 0.5rem; }
+
+        /* ---- top header backdrop ---- */
+        aside {
+            background: var(--topbar-bg, rgba(0, 5, 8, 0.92));
+            backdrop-filter: blur(8px);
+        }
+
+        /* ---- hero typographic layout, based on assets/branding/heropage.svg ---- */
+        .hero-name {
+            font-family: "Cambria", "Georgia", "Times New Roman", serif;
+            font-weight: 400;
+            line-height: 0.92;
+            color: var(--ink);
+        }
+
+        .hero-line {
+            display: block;
+            font-size: clamp(3.25rem, 12vw, 10rem);
+            letter-spacing: -0.01em;
+        }
+
+        /* the SVG splits the name on two staggered lines: Miró starts right of
+           centre, Missotten starts near the left edge */
+        .hero-line-1 {
+            padding-left: 0;
+        }
+
+        .hero-line-2 {
+            padding-left: 0;
+        }
+
+        .hero-watermark {
+            position: absolute;
+            left: -0.04em;
+            top: 12%;
+            transform: translateY(-18%);
+            font-family: "Cambria", "Georgia", "Times New Roman", serif;
+            font-size: clamp(14rem, 44vw, 38rem);
+            line-height: 1;
+            color: #FFFFFF;
+            opacity: 0.45;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-tag {
+            font-family: "Cambria", "Georgia", "Times New Roman", serif;
+            font-size: clamp(0.85rem, 2vw, 1.35rem);
+            letter-spacing: 0.45em;
+            text-transform: lowercase;
+            color: var(--ink);
+            margin-top: clamp(1rem, 3vw, 2.5rem);
+        }
+
+        .nav-link.is-active {
+            color: var(--ink);
+            border-bottom: 1px solid var(--ink);
         }
     </style>
 </head>
@@ -1024,69 +1113,6 @@
         </div>
     </aside>
 
-    <style>
-        /* ---- utility ---- */
-        .mt-2 { margin-top: 0.5rem; }
-
-        /* ---- top header backdrop ---- */
-        aside {
-            background: var(--topbar-bg, rgba(0, 5, 8, 0.92));
-            backdrop-filter: blur(8px);
-        }
-
-        /* ---- hero typographic layout, based on assets/branding/heropage.svg ---- */
-        .hero-name {
-            font-family: "Cambria", "Georgia", "Times New Roman", serif;
-            font-weight: 400;
-            line-height: 0.92;
-            color: var(--ink);
-        }
-
-        .hero-line {
-            display: block;
-            font-size: clamp(3.25rem, 12vw, 10rem);
-            letter-spacing: -0.01em;
-        }
-
-        /* the SVG splits the name on two staggered lines: Miró starts right of
-           centre, Missotten starts near the left edge */
-        .hero-line-1 {
-            padding-left: 0;
-        }
-
-        .hero-line-2 {
-            padding-left: 0;
-        }
-
-        .hero-watermark {
-            position: absolute;
-            left: -0.04em;
-            top: 12%;
-            transform: translateY(-18%);
-            font-family: "Cambria", "Georgia", "Times New Roman", serif;
-            font-size: clamp(14rem, 44vw, 38rem);
-            line-height: 1;
-            color: #FFFFFF;
-            opacity: 0.45;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .hero-tag {
-            font-family: "Cambria", "Georgia", "Times New Roman", serif;
-            font-size: clamp(0.85rem, 2vw, 1.35rem);
-            letter-spacing: 0.45em;
-            text-transform: lowercase;
-            color: var(--ink);
-            margin-top: clamp(1rem, 3vw, 2.5rem);
-        }
-
-        .nav-link.is-active {
-            color: var(--ink);
-            border-bottom: 1px solid var(--ink);
-        }
-    </style>
-
     <main class="flex-1 min-w-0 px-margin-mobile pt-20 pb-section-gap md:pt-24 md:px-margin-desktop">
 
         <section id="index"
@@ -1112,23 +1138,6 @@
 
             <div class="carousel" role="region" aria-roledescription="carousel"
                 aria-label="Projects carousel — use the previous and next buttons to browse">
-                <div class="carousel-filter" id="carousel-filter">
-                    <span class="carousel-filter-label font-label-caps text-label-caps text-secondary tracking-wide">Filter</span>
-                    <div class="carousel-filter-row">
-                        <button type="button" class="carousel-filter-btn" data-filter="all" aria-pressed="true">All</button>
-                        <button type="button" class="carousel-filter-btn" data-filter="video" aria-pressed="false">VIDEO</button>
-                        <button type="button" class="carousel-filter-btn" data-filter="woodwork" aria-pressed="false">WOODWORK</button>
-                        <button type="button" class="carousel-filter-btn" data-filter="graphics" aria-pressed="false">GRAPHICS</button>
-                        <button type="button" class="carousel-filter-btn" data-filter="dev" aria-pressed="false">DEV</button>
-                    </div>
-                    <span class="carousel-filter-label font-label-caps text-label-caps text-secondary tracking-wide mt-2">Status</span>
-                    <div class="carousel-filter-row">
-                        <button type="button" class="carousel-filter-btn" data-status="all" aria-pressed="true">All</button>
-                        <button type="button" class="carousel-filter-btn" data-status="active" aria-pressed="false">ACTIVE</button>
-                        <button type="button" class="carousel-filter-btn" data-status="released" aria-pressed="false">RELEASED</button>
-                        <button type="button" class="carousel-filter-btn" data-status="resting" aria-pressed="false">RESTING</button>
-                    </div>
-                </div>
                 <div class="carousel-viewport" id="project-carousel" tabindex="0">
 
                     <article class="masonry-item project-card">
@@ -1520,22 +1529,41 @@
                         </article>
                     </a>
                 </div>
-                <div class="mt-gutter flex items-center gap-gutter carousel-ui">
-                    <button type="button" class="carousel-btn" id="carousel-prev" aria-label="Previous project"
-                        aria-controls="project-carousel">
-                        <span class="material-symbols-outlined" style="font-size:22px;"
-                            aria-hidden="true">arrow_back</span>
-                    </button>
-                    <button type="button" class="carousel-btn" id="carousel-next" aria-label="Next project"
-                        aria-controls="project-carousel">
-                        <span class="material-symbols-outlined" style="font-size:22px;"
-                            aria-hidden="true">arrow_forward</span>
-                    </button>
-                    <div class="carousel-progress" aria-hidden="true">
-                        <div class="carousel-progress-bar" id="carousel-bar"></div>
+                <div class="mt-gutter carousel-controls">
+                    <div class="carousel-controls-group">
+                        <span class="carousel-filter-label font-label-caps text-label-caps text-secondary">Filter</span>
+                        <div class="carousel-filter-row">
+                            <button type="button" class="carousel-filter-btn" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" class="carousel-filter-btn" data-filter="dev" aria-pressed="false">DEV</button>
+                            <button type="button" class="carousel-filter-btn" data-filter="craft" aria-pressed="false">CRAFT</button>
+                            <button type="button" class="carousel-filter-btn" data-filter="video" aria-pressed="false">VIDEO</button>
+                            <button type="button" class="carousel-filter-btn" data-filter="food" aria-pressed="false">FOOD</button>
+                        </div>
                     </div>
-                    <span class="font-caption text-caption text-secondary whitespace-nowrap" id="carousel-count"
-                        aria-live="polite">1 / 19</span>
+                    <div class="carousel-nav">
+                        <button type="button" class="carousel-btn" id="carousel-prev" aria-label="Previous project"
+                            aria-controls="project-carousel">
+                            <span class="material-symbols-outlined" style="font-size:22px;"
+                                aria-hidden="true">arrow_back</span>
+                        </button>
+                        <div class="carousel-progress" aria-hidden="true">
+                            <div class="carousel-progress-bar" id="carousel-bar"></div>
+                        </div>
+                        <button type="button" class="carousel-btn" id="carousel-next" aria-label="Next project"
+                            aria-controls="project-carousel">
+                            <span class="material-symbols-outlined" style="font-size:22px;"
+                                aria-hidden="true">arrow_forward</span>
+                        </button>
+                    </div>
+                    <div class="carousel-controls-group">
+                        <span class="carousel-filter-label font-label-caps text-label-caps text-secondary">Status</span>
+                        <div class="carousel-filter-row">
+                            <button type="button" class="carousel-filter-btn" data-status="all" aria-pressed="true">All</button>
+                            <button type="button" class="carousel-filter-btn" data-status="active" aria-pressed="false">ACTIVE</button>
+                            <button type="button" class="carousel-filter-btn" data-status="resting" aria-pressed="false">RESTING</button>
+                            <button type="button" class="carousel-filter-btn" data-status="released" aria-pressed="false">RELEASED</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1627,105 +1655,21 @@
         (function () {
             "use strict";
 
-            /* ---- theme ---- */
+            /* ---- theme ----
+               CSS custom properties in :root / html.dark handle all color flipping;
+               we only toggle the class and persist the choice. */
             var root = document.documentElement;
-            var bodyClasses = document.body.classList;
-            var lightTokens = {
-                paper: "#F2EFED", paperRgb: "242 239 237",
-                deep: "#FFFFFF", deepRgb: "255 255 255",
-                ink: "#1F1C57", inkRgb: "31 28 87",
-                soft: "#6E6994", softRgb: "110 105 148",
-                concrete: "#DCD7C8", concreteRgb: "220 215 200",
-                graphite: "#1F1C57", graphiteRgb: "31 28 87",
-                secondary: "#1F1C57", secondaryRgb: "31 28 87",
-                accent: "#fbbf24", accentRgb: "251 191 36",
-                accentPink: "#FFC7F0", accentPinkRgb: "255 199 240",
-                accentGreen: "#105639", accentGreenRgb: "16 86 57",
-                shadowSoft: "0 18px 40px rgba(31, 28, 87, 0.10)",
-                shadowHover: "0 24px 48px rgba(31, 28, 87, 0.16)",
-                nav: "rgba(242, 239, 237, 0.85)",
-                topbar: "rgba(242, 239, 237, 0.85)"
-            };
-            var darkTokens = {
-                paper: "#14122D", paperRgb: "20 18 45",
-                deep: "#1F1C57", deepRgb: "31 28 87",
-                ink: "#F2EFED", inkRgb: "242 239 237",
-                soft: "#C7C2B2", softRgb: "199 194 178",
-                concrete: "#2E2A63", concreteRgb: "46 42 99",
-                graphite: "#C9C5B5", graphiteRgb: "201 197 181",
-                secondary: "#fbbf24", secondaryRgb: "251 191 36",
-                accent: "#fbbf24", accentRgb: "251 191 36",
-                accentPink: "#FFC7F0", accentPinkRgb: "255 199 240",
-                accentGreen: "#8FB89E", accentGreenRgb: "143 184 158",
-                shadowSoft: "0 18px 40px rgba(0, 0, 0, 0.4)",
-                shadowHover: "0 24px 48px rgba(0, 0, 0, 0.5)",
-                nav: "rgba(20, 18, 45, 0.92)",
-                topbar: "rgba(20, 18, 45, 0.92)"
-            };
-            /* keep Tailwind's runtime tokens in sync with the SAME variables the CSS uses,
-               so utilities like bg-paper flip too; never fatal if something odd happens */
-            if (window.tailwind && window.tailwind.config && window.tailwind.config.theme && window.tailwind.config.theme.extend) {
-                var twColors = window.tailwind.config.theme.extend.colors;
-                twColors.paper = "rgb(var(--paper-rgb) / <alpha-value>)";
-                twColors["paper-deep"] = "rgb(var(--paper-deep-rgb) / <alpha-value>)";
-                twColors.ink = "rgb(var(--ink-rgb) / <alpha-value>)";
-                twColors["ink-soft"] = "rgb(var(--ink-soft-rgb) / <alpha-value>)";
-                twColors.concrete = "rgb(var(--concrete-rgb) / <alpha-value>)";
-                twColors.graphite = "rgb(var(--graphite-rgb) / <alpha-value>)";
-                twColors.secondary = "rgb(var(--secondary-rgb) / <alpha-value>)";
+            var saved = (function () { try { return localStorage.getItem("theme"); } catch (e) { return null; } })();
+            if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                root.classList.add("dark");
             }
-            function paintTheme(mode) {
-                var t = mode === "dark" ? darkTokens : lightTokens;
-                var s = document.documentElement.style;
-                s.setProperty("--paper", t.paper);
-                s.setProperty("--paper-rgb", t.paperRgb);
-                s.setProperty("--paper-deep", t.deep);
-                s.setProperty("--paper-deep-rgb", t.deepRgb);
-                s.setProperty("--ink", t.ink);
-                s.setProperty("--ink-rgb", t.inkRgb);
-                s.setProperty("--ink-soft", t.soft);
-                s.setProperty("--ink-soft-rgb", t.softRgb);
-                s.setProperty("--concrete", t.concrete);
-                s.setProperty("--concrete-rgb", t.concreteRgb);
-                s.setProperty("--graphite", t.graphite);
-                s.setProperty("--graphite-rgb", t.graphiteRgb);
-                s.setProperty("--secondary", t.secondary);
-                s.setProperty("--secondary-rgb", t.secondaryRgb);
-                s.setProperty("--accent", t.accent);
-                s.setProperty("--accent-rgb", t.accentRgb);
-                s.setProperty("--accent-pink", t.accentPink);
-                s.setProperty("--accent-pink-rgb", t.accentPinkRgb);
-                s.setProperty("--accent-green", t.accentGreen);
-                s.setProperty("--accent-green-rgb", t.accentGreenRgb);
-                s.setProperty("--shadow-soft", t.shadowSoft);
-                s.setProperty("--shadow-hover", t.shadowHover);
-                s.setProperty("--nav-bg", t.nav);
-                s.setProperty("--topbar-bg", t.topbar);
+            function toggleTheme() {
+                var dark = root.classList.toggle("dark");
+                try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) { }
             }
-            var saved = null;
-            try { saved = localStorage.getItem("theme"); } catch (e) { /* private mode */ }
-            function applyTheme(mode) {
-                var dark = mode === "dark";
-                root.classList.toggle("dark", dark);
-                bodyClasses.toggle("dark", dark);
-                paintTheme(mode);
-            }
-            applyTheme(saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light");
-            document.getElementById("theme-toggle").addEventListener("click", function () {
-                var mode = root.classList.contains("dark") ? "light" : "dark";
-                applyTheme(mode);
-                try { localStorage.setItem("theme", mode); } catch (e) { }
-            });
-
-            // Also handle mobile drawer theme toggle button
+            document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
             var mobileThemeToggle = document.getElementById("theme-toggle-btn");
-            if (mobileThemeToggle) {
-                mobileThemeToggle.addEventListener("click", function () {
-                    var mode = root.classList.contains("dark") ? "light" : "dark";
-                    applyTheme(mode);
-                    try { localStorage.setItem("theme", mode); } catch (e) { }
-                });
-            }
+            if (mobileThemeToggle) mobileThemeToggle.addEventListener("click", toggleTheme);
 
             /* ---- mobile drawer ---- */
             var drawer = document.getElementById("mobile-drawer");
@@ -1743,9 +1687,6 @@
             document.getElementById("open-drawer").addEventListener("click", openDrawer);
             document.getElementById("close-drawer").addEventListener("click", closeDrawer);
             overlay.addEventListener("click", closeDrawer);
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape") { closeDrawer(); }
-            });
 
             /* ---- scrollspy ---- */
             var links = document.querySelectorAll(".group[data-section]");
@@ -1780,9 +1721,6 @@
                 });
             });
             lightbox.addEventListener("click", closeLightbox);
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && lightbox.classList.contains("is-open")) { closeLightbox(); }
-            });
 
             /* ---- projects carousel ---- */
             var carousel = document.getElementById("project-carousel");
@@ -1790,9 +1728,6 @@
             var carouselNext = document.getElementById("carousel-next");
             var carouselBar = document.getElementById("carousel-bar");
             var carouselCount = document.getElementById("carousel-count");
-            var carouselCaption = document.getElementById("carousel-caption");
-            var carouselSubcaption = document.getElementById("carousel-subcaption");
-            var carouselFilter = document.getElementById("carousel-filter");
             var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
             if (carousel && carouselPrev && carouselNext) {
                 var slides = Array.prototype.slice.call(carousel.children);
@@ -1853,12 +1788,7 @@
                     return best;
                 }
                 function updateCaption() {
-                    var card = cards[selected];
-                    if (!card) { return; }
-                    var title = card.querySelector("h3");
-                    var label = card.querySelector(".font-label-caps");
-                    if (carouselCaption && title) { carouselCaption.textContent = title.textContent.trim(); }
-                    if (carouselSubcaption && label) { carouselSubcaption.textContent = label.textContent.replace(/\s+/g, " ").trim(); }
+                    // captions are no longer displayed below the carousel
                 }
                 function updateCarousel() {
                     ticking = false;
@@ -1921,8 +1851,8 @@
                 window.addEventListener("resize", requestUpdate);
                 if (reduceMotionQuery.addEventListener) { reduceMotionQuery.addEventListener("change", reduceMotionListener); }
                 var currentStatus = "all";
-                if (carouselFilter) {
-                    var filterButtons = carouselFilter.querySelectorAll(".carousel-filter-btn");
+                var filterButtons = carousel.querySelectorAll(".carousel-filter-btn");
+                if (filterButtons.length) {
                     filterButtons.forEach(function (btn) {
                         btn.addEventListener("click", function () {
                             var filter = btn.getAttribute("data-filter");
@@ -2067,8 +1997,13 @@
                 onlyfansPopup.setAttribute("aria-hidden", "false");
             });
             onlyfansPopup.addEventListener("click", closeOnlyfans);
+
+            /* ---- global escape: close any open overlay ---- */
             document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && onlyfansPopup.classList.contains("is-open")) { closeOnlyfans(); }
+                if (e.key !== "Escape") return;
+                closeDrawer();
+                closeLightbox();
+                closeOnlyfans();
             });
         })();
     </script>
