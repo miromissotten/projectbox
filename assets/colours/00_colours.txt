@@ -1,0 +1,7 @@
+yellow: F8E666
+blue: 1F1C57
+beige: F2EFED
+
+extra:
+pink: FFC7F0
+green: 105639
