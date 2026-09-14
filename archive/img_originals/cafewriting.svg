@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200"
+    role="img" aria-label="Cafe Writing concept illustration — a quote card in a swipe stack on warm paper">
+    <rect width="900" height="1200" fill="#faf6f1" />
+    <ellipse cx="180" cy="210" rx="250" ry="150" fill="#f3ece2" />
+    <ellipse cx="740" cy="1050" rx="270" ry="150" fill="#f3ece2" />
+
+    <rect x="60" y="100" width="180" height="3" fill="#7a5c3e" />
+    <text x="60" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="700"
+        fill="#2c241b">Cafe Writing</text>
+    <text x="60" y="216" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-style="italic"
+        fill="#7a5c3e">a small corner for reading and leaving words behind</text>
+
+    <rect x="235" y="430" width="440" height="410" rx="16" fill="#f0e9dc" stroke="#d9cfc0" stroke-width="2"
+        transform="rotate(-4 455 635)" />
+    <rect x="265" y="475" width="420" height="330" rx="16" fill="#efe6d8" stroke="#d9cfc0" stroke-width="2"
+        transform="rotate(3.5 475 640)" />
+
+    <rect x="255" y="500" width="420" height="345" rx="16" fill="#ffffff" opacity="0.35" transform="translate(7 9)" />
+    <rect x="255" y="500" width="420" height="345" rx="16" fill="#fffdfa" />
+    <text x="465" y="570" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-style="italic" fill="#2c241b">Lanterns on the river</text>
+    <text x="465" y="616" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-style="italic" fill="#2c241b">keep their own small</text>
+    <text x="465" y="662" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="28" font-style="italic" fill="#2c241b">weather.</text>
+    <rect x="350" y="700" width="230" height="2" fill="#7a5c3e" />
+    <text x="465" y="748" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="20" fill="#7a5c3e">— M. Hart</text>
+
+    <text x="450" y="1120" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+        font-size="24" fill="#7a5c3e" letter-spacing="3">READ · SUBMIT · MODERATE · PRINT</text>
+</svg>

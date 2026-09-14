@@ -12,6 +12,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
+    <!-- Preload critical above-fold images for faster initial paint -->
+    <link rel="preload" as="image" href="assets/img/keyholders.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/img/curiositycorner.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/img/modularflavour.webp" type="image/webp">
+    <link rel="preload" as="image" href="assets/img/portable-sunrise.webp" type="image/webp">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
         tailwind.config = {
@@ -166,6 +171,7 @@
             cursor: grab;
             -webkit-user-select: none;
             user-select: none;
+            perspective: 1200px;
         }
 
         .carousel-viewport::-webkit-scrollbar {
@@ -1142,9 +1148,11 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-64 overflow-hidden">
-                            <img src="assets/img/keyholders.jpg"
-                                alt="Wooden board with magnetic key holders and keys hanging on it" width="1600"
-                                height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            <picture>
+                                <source srcset="assets/img/keyholders.webp" type="image/webp">
+                                <img alt="Wooden board with magnetic key holders and keys hanging on it" width="1600"
+                                    height="2134" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1181,9 +1189,11 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-56 overflow-hidden">
-                            <img src="assets/img/curiositycorner.jpg"
-                                alt="Vintage-style poster reading Curiosity Corner" width="1024" height="1024"
+                            <picture>
+                                <source srcset="assets/img/curiositycorner.webp" type="image/webp">
+                                <img alt="Vintage-style poster reading Curiosity Corner" width="1024" height="1024"
                                 loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1200,9 +1210,11 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-48 overflow-hidden">
-                            <img src="assets/img/modularflavour.jpg"
-                                alt="Ramen flowchart page from the generated cookbook" width="1312" height="900"
+                            <picture>
+                                <source srcset="assets/img/modularflavour.webp" type="image/webp">
+                                <img alt="Ramen flowchart page from the generated cookbook" width="1312" height="900"
                                 loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1219,10 +1231,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-60 overflow-hidden">
-                            <img src="assets/img/portable-sunrise.jpg"
-                                alt="Portable Sunrise prototype: ESP32 and addressable LED strip wired on a breadboard"
+                            <picture>
+                                <source srcset="assets/img/portable-sunrise.webp" type="image/webp">
+                                <img alt="Portable Sunrise prototype: ESP32 and addressable LED strip wired on a breadboard"
                                 width="1600" height="2134" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1239,10 +1253,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-52 overflow-hidden">
-                            <img src="assets/img/shoji-lamp.jpg"
-                                alt="Shoji-style table lamp glowing with a 3D-printed koi and dragon light panel"
+                            <picture>
+                                <source srcset="assets/img/shoji-lamp.webp" type="image/webp">
+                                <img alt="Shoji-style table lamp glowing with a 3D-printed koi and dragon light panel"
                                 width="1600" height="2400" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1275,10 +1291,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-56 overflow-hidden">
-                            <img src="assets/img/espresso.jpg"
-                                alt="Yellow Rancilio Silvia espresso machine on the kitchen counter with grinder and kettle"
+                            <picture>
+                                <source srcset="assets/img/espresso.webp" type="image/webp">
+                                <img alt="Yellow Rancilio Silvia espresso machine on the kitchen counter with grinder and kettle"
                                 width="1600" height="1066" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1296,10 +1314,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-64 overflow-hidden">
-                            <img src="assets/img/pickguardjbass.jpg"
-                                alt="Yellow Jazz Bass on a stand with a white 3D-printed pickguard showing a black sun and moon motif"
+                            <picture>
+                                <source srcset="assets/img/pickguardjbass.webp" type="image/webp">
+                                <img alt="Yellow Jazz Bass on a stand with a white 3D-printed pickguard showing a black sun and moon motif"
                                 width="1600" height="2400" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1316,10 +1336,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-64 overflow-hidden">
-                            <img src="assets/img/multiplicationapp.jpg"
-                                alt="Phone screenshot of the multiplication app showing 68 × 76 with a green OK button"
+                            <picture>
+                                <source srcset="assets/img/multiplicationapp.webp" type="image/webp">
+                                <img alt="Phone screenshot of the multiplication app showing 68 × 76 with a green OK button"
                                 width="1080" height="2340" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1337,10 +1359,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-56 overflow-hidden">
-                            <img src="assets/img/series7.jpg"
-                                alt="Yellow Series 7 chair with a black-and-copper marbled seat, next to a blue and a green chair"
+                            <picture>
+                                <source srcset="assets/img/series7.webp" type="image/webp">
+                                <img alt="Yellow Series 7 chair with a black-and-copper marbled seat, next to a blue and a green chair"
                                 width="1600" height="2134" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1358,9 +1382,11 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-40 overflow-hidden">
-                            <img src="assets/img/myfirstalbum.jpg"
-                                alt="White album cover with a blue handwritten signature — Miró, 2022" width="1600"
+                            <picture>
+                                <source srcset="assets/img/myfirstalbum.webp" type="image/webp">
+                                <img alt="White album cover with a blue handwritten signature — Miró, 2022" width="1600"
                                 height="1600" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1377,10 +1403,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-52 overflow-hidden">
-                            <img src="assets/img/bikehandlebarends.jpg"
-                                alt="Close-up of the commuter's snowy handlebar with the printed yellow bar end"
+                            <picture>
+                                <source srcset="assets/img/bikehandlebarends.webp" type="image/webp">
+                                <img alt="Close-up of the commuter's snowy handlebar with the printed yellow bar end"
                                 width="740" height="360" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1413,10 +1441,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-56 overflow-hidden">
-                            <img src="assets/img/plantenbewateraar.jpg"
-                                alt="Spider plant hanging by the window — the plant the waterer keeps alive"
+                            <picture>
+                                <source srcset="assets/img/plantenbewateraar.webp" type="image/webp">
+                                <img alt="Spider plant hanging by the window — the plant the waterer keeps alive"
                                 width="1600" height="2134" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1435,10 +1465,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-52 overflow-hidden">
-                            <img src="assets/img/dnd-eric.jpg"
-                                alt="AI-generated portrait of Nyx, the painted cat-dragon bard character, wearing a pink beret"
+                            <picture>
+                                <source srcset="assets/img/dnd-eric.webp" type="image/webp">
+                                <img alt="AI-generated portrait of Nyx, the painted cat-dragon bard character, wearing a pink beret"
                                 width="768" height="1344" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1462,10 +1494,12 @@
 
                     <article class="masonry-item project-card">
                         <figure class="h-52 overflow-hidden">
-                            <img src="assets/img/dnd-lucas.jpg"
-                                alt="The Faerûn campaign map from Lucas's campaign shown on the TV at the table"
+                            <picture>
+                                <source srcset="assets/img/dnd-lucas.webp" type="image/webp">
+                                <img alt="The Faerûn campaign map from Lucas's campaign shown on the TV at the table"
                                 width="1600" height="730" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover">
+                            </picture>
                         </figure>
                         <div class="p-gutter">
                             <div class="flex items-center justify-between gap-unit mb-4">
@@ -1485,10 +1519,12 @@
                         title="Open the Spirograph simulator" class="block group">
                         <article class="masonry-item project-card project-link">
                             <figure class="h-64 overflow-hidden">
-                                <img src="assets/img/spirograph.jpg"
-                                    alt="Screenshot of the Spirograph simulator: a violet gear-drawing curve tracing itself on a dark canvas with parameter sliders"
+                                <picture>
+                                <source srcset="assets/img/spirograph.webp" type="image/webp">
+                                <img alt="Screenshot of the Spirograph simulator: a violet gear-drawing curve tracing itself on a dark canvas with parameter sliders"
                                     width="903" height="1956" loading="lazy" decoding="async"
                                     class="w-full h-full object-cover">
+                            </picture>
                             </figure>
                             <div class="p-gutter">
                                 <div class="flex items-center justify-between gap-unit mb-4">
@@ -1851,7 +1887,7 @@
                 window.addEventListener("resize", requestUpdate);
                 if (reduceMotionQuery.addEventListener) { reduceMotionQuery.addEventListener("change", reduceMotionListener); }
                 var currentStatus = "all";
-                var filterButtons = carousel.querySelectorAll(".carousel-filter-btn");
+                var filterButtons = document.querySelectorAll(".carousel-filter-btn");
                 if (filterButtons.length) {
                     filterButtons.forEach(function (btn) {
                         btn.addEventListener("click", function () {
