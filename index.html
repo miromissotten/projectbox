@@ -149,7 +149,11 @@
         .carousel {
             position: relative;
             padding: 8px 0 16px;
-            overflow: hidden;
+            /* clip, not hidden: a hidden box is a scroll container the user can never
+               scroll, and a vertical touch swipe that lands on one can be swallowed
+               instead of scrolling the page. clip keeps the same visual clipping
+               without being a scroll container. */
+            overflow: clip;
         }
 
         html.dark .carousel {
@@ -161,12 +165,22 @@
             display: flex;
             align-items: stretch;
             gap: 10px;
+            /* Horizontal scroller only. Do not add overflow-y: hidden back: with
+               overflow-x set, the y axis can only be auto/hidden/scroll (clip
+               degrades to hidden), and a y axis nobody can scroll is a known way
+               for a vertical touch swipe to be eaten instead of scrolling the page.
+               y stays auto (implicit) and nothing overflows vertically because the
+               cards stretch to the tallest one; any bar is hidden by
+               scrollbar-width below. */
             overflow-x: auto;
-            overflow-y: hidden;
             scroll-snap-type: x mandatory;
             padding: 24px calc(50% - min(38vw, 170px) - 5px) 40px;
             scrollbar-width: none;
             overscroll-behavior-x: contain;
+            /* Keep pan-y here. With pan-x alone (as this line had until e963a2b) a
+               touch swipe that starts on the carousel is handled by nobody: the
+               page cannot pan vertically and the carousel cannot pan vertically
+               either, so the page does not move at all. */
             touch-action: pan-x pan-y pinch-zoom;
             cursor: grab;
             -webkit-user-select: none;
