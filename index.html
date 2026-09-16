@@ -526,7 +526,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            z-index: 90;
+            z-index: 200; /* above carousel cards (max inline z-index 100) */
             background: rgba(0, 5, 8, 0.88);
             backdrop-filter: blur(6px);
             padding: 32px;
@@ -553,7 +553,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            z-index: 91;
+            z-index: 201; /* above lightbox (200) and carousel cards (max 100) */
             background: rgba(0, 5, 8, 0.92);
             overflow: auto;
         }
@@ -1988,7 +1988,7 @@
                 carousel.addEventListener("pointerdown", function (e) {
                     if (e.pointerType === "touch") { dragMoved = 0; return; }
                     if (e.button !== 0) { return; }
-                    if (e.target.closest("video, a, button")) { return; }
+                    if (e.target.closest("video, a, button, img")) { return; }
                     pointerDown = true;
                     dragging = false;
                     dragMoved = 0;
