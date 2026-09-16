@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-
 <title>Spirograph Simulator</title>
 <style>
 body{font-family:sans-serif;background:#0b0e14;color:#e8ecf3;margin:0;display:flex;flex-direction:column;align-items:center;padding:20px}
@@ -11,7 +10,8 @@ h1{font-size:18px;font-weight:600;margin:0;display:flex;gap:10px}
 .subtitle{color:#8b94a6;font-size:12px}
 .badge{background:#1a1f2b;border:1px solid #262d3c;border-radius:8px;padding:6px 10px;font-size:12px;font-variant-numeric:tabular-nums}
 main{width:100%;max-width:1100px;display:grid;grid-template-columns:1fr 320px;gap:16px}
-canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:14px;border:1px solid #222a3a;box-shadow:0 18px 40px -22px rgba(0,0,0,.7);background:#0b0e14}
+canvas{display:block;width:100%;aspect-ratio:1/1;border-radius:14px;border:1px solid #222a3a;box-shadow:0 18px 40px -22px rgba(0,0,0,.7);background:#0b0e14;cursor:crosshair}
+.canvas-wrap{position:relative}
 .canvas-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;padding:10px 14px;font-size:11px;color:#8b94a6;pointer-events:none;background:linear-gradient(to top,rgba(11,14,20,.5),transparent)}
 aside{display:flex;flex-direction:column;gap:12px}
 .panel{background:#131720;border:1px solid #222a3a;border-radius:12px;padding:14px}
@@ -36,26 +36,29 @@ input[type=range]{flex:1;accent-color:#7aa6ff}
 .seg button.active{background:#7aa6ff;color:#0b0e14;font-weight:600}
 .coords{color:#6fdcb2;font-variant-numeric:tabular-nums}
 footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;text-align:center}
+.mode-help{margin-top:10px;font-size:11px;color:#6a7080;line-height:1.5}
+.inline{display:flex;align-items:center}
+.mt2{margin-top:8px}
 </style>
 </head>
 <body>
 <header>
   <h1>
-    <span style="color:#7aa6ff;font-size:22px">✦</span>
+    <span style="color:#7aa6ff;font-size:22px">&#10022;</span>
     Spirograph Simulator
     <span class="subtitle">classic gear drawing, reimagined in code</span>
   </h1>
   <div class="topsummary">
     <span class="badge" id="statPoints">0 points</span>
-    <span class="badge" id="statCoords">R 200 · r 60 · d 90 · 3 rev</span>
+    <span class="badge" id="statCoords">R 200 &middot; r 60 &middot; d 90 &middot; 3 rev</span>
   </div>
 </header>
 <main>
-  <div class="canvas-wrap" style="position:relative">
+  <div class="canvas-wrap">
     <canvas id="cv" width="600" height="600"></canvas>
     <div class="canvas-foot">
-      <span>Drag on canvas to reposition the animation center · <code>Shift</code>+scroll to zoom</span>
-      <span class="coords" id="mouseCoords">—</span>
+      <span>Drag on canvas to reposition &middot; Shift+scroll to zoom</span>
+      <span class="coords" id="mouseCoords">&mdash;</span>
     </div>
   </div>
 
@@ -93,7 +96,7 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
       <h2>Color</h2>
       <div class="row inline">
         <input type="color" id="color" value="#7aa6ff" />
-        <label style="flex:0 0 auto">— Background</label>
+        <label style="flex:0 0 auto">&mdash; Background</label>
         <input type="color" id="bgcolor" value="#0b0e14" />
       </div>
       <div class="row mt2" style="margin-top:8px">
@@ -128,7 +131,7 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
       <div class="row mt2" style="margin-top:6px">
         <label>Animate by</label>
         <div class="seg" id="anmodeSeg" style="flex:1">
-          <button data-anmode="angle" class="active">Angle θ</button>
+          <button data-anmode="angle" class="active">Angle &theta;</button>
           <button data-anmode="rev">Revolutions</button>
         </div>
       </div>
@@ -143,35 +146,35 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
       <div class="preset-grid">
         <div class="preset" data-preset="classic">
           <div class="name">Classic square</div>
-          <div class="meta">R 180 · r 60 · d 90</div>
+          <div class="meta">R 180 &middot; r 60 &middot; d 90</div>
         </div>
         <div class="preset" data-preset="flower">
           <div class="name">Flower</div>
-          <div class="meta">R 180 · r 51 · d 120</div>
+          <div class="meta">R 180 &middot; r 51 &middot; d 120</div>
         </div>
         <div class="preset" data-preset="star">
           <div class="name">Star burst</div>
-          <div class="meta">R 180 · r 45 · d 80</div>
+          <div class="meta">R 180 &middot; r 45 &middot; d 80</div>
         </div>
         <div class="preset" data-preset="loop">
           <div class="name">Loop</div>
-          <div class="meta">R 180 · r 72 · d 40</div>
+          <div class="meta">R 180 &middot; r 72 &middot; d 40</div>
         </div>
         <div class="preset" data-preset="dense">
           <div class="name">Dense web</div>
-          <div class="meta">R 180 · r 48 · d 100 · 5 rev</div>
+          <div class="meta">R 180 &middot; r 48 &middot; d 100 &middot; 5 rev</div>
         </div>
         <div class="preset" data-preset="ratio9">
           <div class="name">9:1 ratio</div>
-          <div class="meta">R 180 · r 20 · d 90</div>
+          <div class="meta">R 180 &middot; r 20 &middot; d 90</div>
         </div>
         <div class="preset" data-preset="ratio73">
           <div class="name">7:3 curls</div>
-          <div class="meta">R 180 · r 77 · d 55</div>
+          <div class="meta">R 180 &middot; r 77 &middot; d 55</div>
         </div>
         <div class="preset" data-preset="negative">
           <div class="name">Negative d</div>
-          <div class="meta">R 180 · r 60 · d −50</div>
+          <div class="meta">R 180 &middot; r 60 &middot; d &minus;50</div>
         </div>
       </div>
       <div class="mode-help">
@@ -183,7 +186,7 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
   </aside>
 
 <footer>
-  Parametric spirograph · epicycloid/hypocycloid family · built as a single self-contained HTML file
+  Parametric spirograph &middot; epicycloid/hypocycloid family &middot; built as a single self-contained HTML file
 </footer>
 
 <script>
@@ -317,8 +320,8 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
   function drawPenMarker(){
     const Rv=+R.value, rv=+r.value, dv=+d0.value;
     const p=spiroPoint(animTheta,Rv,rv,dv);
-    const sx=viewCenter.x+(spiroCenter.x+p.x-spiroCenter.x)*viewZoom;
-    const sy=viewCenter.y+(spiroCenter.y+p.y-spiroCenter.y)*viewZoom;
+    const sx=viewCenter.x+(p.x)*viewZoom;
+    const sy=viewCenter.y+(p.y)*viewZoom;
     ctx.save(); ctx.translate(sx,sy);
     const rad=4*viewZoom;
     ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(0,0,Math.max(2,rad),0,2*Math.PI); ctx.fill();
@@ -368,7 +371,7 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
 
   function updateStats(){
     statPoints.textContent = points.length.toLocaleString()+" points";
-    statCoords.textContent = `R ${R.value} · r ${r.value} · d ${d0.value} · ${rev.value} rev`;
+    statCoords.textContent = `R ${R.value} &middot; r ${r.value} &middot; d ${d0.value} &middot; ${rev.value} rev`;
   }
   function afterParamChange(){
     if(animRunning) stopAnimation();
@@ -390,6 +393,149 @@ footer{width:100%;max-width:1100px;margin-top:18px;font-size:11px;color:#8b94a6;
   bgEl.addEventListener("input",requestFullRedraw);
   colorEl.addEventListener("input",requestFullRedraw);
   speedEl.addEventListener("input",()=>{ speedVal.textContent=parseFloat(speedEl.value).toFixed(1); });
-  blendSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ blendSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); blendMode=btn.dataset.blend; requestFullRedraw(); }); });  anmodeSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ anmodeSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); animMode=btn.dataset.anmode; }); });  drawBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); sampleCurve(); updateStats(); requestFullRedraw(); });  animateBtn.addEventListener("click",toggleAnimation); clearBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); points=[]; updateStats(); redraw(); }); resetBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); viewZoom=1; spiroCenter={x:0,y:0}; viewCenter={x:W/2,y:H/2}; requestFullRedraw(); }); saveBtn.addEventListener("click",()=>{ animRunning=false; redraw(); const link=document.createElement("a"); link.download=`spirograph_R${R.value}_r${r.value}_d${d0.value}_rev${rev.value}.png`; link.href=cv.toDataURL("image/png"); link.click(); }); mirrorBtn.addEventListener("click",()=>{ mirrorOverlay=!mirrorOverlay; mirrorBtn.textContent=mirrorOverlay?"Mirror: ON":"Toggle mirror overlay"; requestFullRedraw(); });  const presets = { classic:{R:180,r:60,d:90,rev:3}, flower:{R:180,r:51,d:120,rev:3}, star:{R:180,r:45,d:80,rev:3}, loop:{R:180,r:72,d:40,rev:3}, dense:{R:180,r:48,d:100,rev:5}, ratio9:{R:180,r:20,d:90,rev:3}, ratio73:{R:180,r:77,d:55,rev:3}, negative:{R:180,r:60,d:-50,rev:3} }; document.querySelectorAll(".preset").forEach(el=>{ el.addEventListener("click",()=>{ const s=presets[el.dataset.preset]; if(!s) return; R.value=s.R; Rnum.value=s.R; r.value=s.r; rnum.value=s.r; d0.value=s.d; dnum.value=s.d; rev.value=s.rev; revnum.value=s.rev; afterParamChange(); }); });  cv.addEventListener("mousemove",e=>{ const rect=cv.getBoundingClientRect(); const sx=(e.clientX-rect.left)*(W/rect.width); const sy=(e.clientY-rect.top)*(H/rect.height); const w=screenToWorld(sx,sy); mouseCoords.textContent=`world (${w.x.toFixed(1)}, ${w.y.toFixed(1)}) · screen (${sx.toFixed(0)}, ${sy.toFixed(0)})`; }); cv.addEventListener("mouseleave",()=>{ mouseCoords.textContent="—"; }); let drag=null; cv.addEventListener("pointerdown",e=>{ drag={x:e.clientX,y:e.clientY}; cv.setPointerCapture(e.pointerId); }); cv.addEventListener("pointermove",e=>{ if(!drag) return; const rect=cv.getBoundingClientRect(); const nx=(e.clientX-rect.left)*(W/rect.width); const ny=(e.clientY-rect.top)*(H/rect.height); spiroCenter.x-=(nx-drag.x)/viewZoom; spiroCenter.y-=(ny-drag.y)/viewZoom; viewCenter.x=W/2; viewCenter.y=H/2; drag.x=nx; drag.y=ny; requestFullRedraw(); }); cv.addEventListener("pointerup",()=>{ drag=null; }); cv.addEventListener("pointercancel",()=>{ drag=null; });  cv.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault(); const rect=cv.getBoundingClientRect(); const sx=(e.clientX-rect.left)*(W/rect.width); const sy=(e.clientY-rect.top)*(H/rect.height); const oldW=screenToWorld(sx,sy); const factor=Math.exp(-e.deltaY/200); const newZoom=clamp(viewZoom*factor,0.1,20); viewZoom=newZoom; viewCenter.x=sx-(sx-viewCenter.x)*(viewZoom/(viewZoom/factor)); viewCenter.y=sy-(sy-viewCenter.y)*(viewZoom/(viewZoom/factor)); requestFullRedraw(); },{passive:false}); sampleCurve(); updateStats(); redraw(); })();</script>
+  blendSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ blendSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); blendMode=btn.dataset.blend; requestFullRedraw(); }); });
+  anmodeSeg.querySelectorAll("button").forEach(btn=>{ btn.addEventListener("click",()=>{ anmodeSeg.querySelectorAll("button").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); animMode=btn.dataset.anmode; }); });
+  drawBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); sampleCurve(); updateStats(); requestFullRedraw(); });
+  animateBtn.addEventListener("click",toggleAnimation);
+  clearBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); points=[]; updateStats(); redraw(); });
+  resetBtn.addEventListener("click",()=>{ if(animRunning) stopAnimation(); viewZoom=1; spiroCenter={x:0,y:0}; viewCenter={x:W/2,y:H/2}; requestFullRedraw(); });
+  saveBtn.addEventListener("click",()=>{ animRunning=false; redraw(); const link=document.createElement("a"); link.download=`spirograph_R${R.value}_r${r.value}_d${d0.value}_rev${rev.value}.png`; link.href=cv.toDataURL("image/png"); link.click(); });
+  mirrorBtn.addEventListener("click",()=>{ mirrorOverlay=!mirrorOverlay; mirrorBtn.textContent=mirrorOverlay?"Mirror: ON":"Toggle mirror overlay"; requestFullRedraw(); });
+
+  const presets = { classic:{R:180,r:60,d:90,rev:3}, flower:{R:180,r:51,d:120,rev:3}, star:{R:180,r:45,d:80,rev:3}, loop:{R:180,r:72,d:40,rev:3}, dense:{R:180,r:48,d:100,rev:5}, ratio9:{R:180,r:20,d:90,rev:3}, ratio73:{R:180,r:77,d:55,rev:3}, negative:{R:180,r:60,d:-50,rev:3} };
+  document.querySelectorAll(".preset").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const s=presets[el.dataset.preset];
+      if(!s) return;
+      R.value=s.R; Rnum.value=s.R; r.value=s.r; rnum.value=s.r; d0.value=s.d; dnum.value=s.d; rev.value=s.rev; revnum.value=s.rev;
+      afterParamChange();
+    });
+  });
+
+  // ---- canvas interaction: pan, zoom, coords ----
+  let isDragging = false;
+  let dragStart = {x:0, y:0};
+  let dragCenterStart = {x:0, y:0};
+
+  function getCanvasCoords(e){
+    const rect = cv.getBoundingClientRect();
+    const scaleX = W / rect.width;
+    const scaleY = H / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
+
+  function updateMouseCoords(e){
+    const c = getCanvasCoords(e);
+    const world = screenToWorld(c.x, c.y);
+    mouseCoords.textContent = `${world.x.toFixed(0)} &middot; ${world.y.toFixed(0)}`;
+  }
+
+  cv.addEventListener("mousemove", e => {
+    updateMouseCoords(e);
+    if (isDragging) {
+      const c = getCanvasCoords(e);
+      viewCenter.x = dragCenterStart.x + (c.x - dragStart.x);
+      viewCenter.y = dragCenterStart.y + (c.y - dragStart.y);
+      requestFullRedraw();
+    }
+  });
+
+  cv.addEventListener("mouseleave", () => {
+    mouseCoords.textContent = "&mdash;";
+  });
+
+  cv.addEventListener("mousedown", e => {
+    if (e.button !== 0) return;
+    isDragging = true;
+    const c = getCanvasCoords(e);
+    dragStart = c;
+    dragCenterStart = { x: viewCenter.x, y: viewCenter.y };
+    cv.style.cursor = "grabbing";
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (isDragging) {
+      isDragging = false;
+      cv.style.cursor = "crosshair";
+    }
+  });
+
+  cv.addEventListener("wheel", e => {
+    e.preventDefault();
+    const c = getCanvasCoords(e);
+    const worldBefore = screenToWorld(c.x, c.y);
+    const factor = e.deltaY > 0 ? 0.9 : 1.1;
+    viewZoom = clamp(viewZoom * factor, 0.2, 8);
+    viewCenter.x = c.x - (worldBefore.x - spiroCenter.x) * viewZoom;
+    viewCenter.y = c.y - (worldBefore.y - spiroCenter.y) * viewZoom;
+    requestFullRedraw();
+  }, { passive: false });
+
+  // Touch support: pan with one finger, pinch-to-zoom with two
+  let touchStart = null;
+  let touchCenterStart = null;
+  let touchZoomStart = 1;
+  let touchDist = 0;
+
+  cv.addEventListener("touchstart", e => {
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      const rect = cv.getBoundingClientRect();
+      touchStart = {
+        x: t.clientX - rect.left,
+        y: t.clientY - rect.top
+      };
+      touchCenterStart = { x: viewCenter.x, y: viewCenter.y };
+      isDragging = true;
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchDist = Math.sqrt(dx*dx + dy*dy);
+      touchZoomStart = viewZoom;
+    }
+  }, { passive: true });
+
+  cv.addEventListener("touchmove", e => {
+    e.preventDefault();
+    if (e.touches.length === 1 && touchStart && isDragging) {
+      const t = e.touches[0];
+      const rect = cv.getBoundingClientRect();
+      const cx = t.clientX - rect.left;
+      const cy = t.clientY - rect.top;
+      viewCenter.x = touchCenterStart.x + (cx - touchStart.x);
+      viewCenter.y = touchCenterStart.y + (cy - touchStart.y);
+      requestFullRedraw();
+    } else if (e.touches.length === 2 && touchDist > 0) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      viewZoom = clamp(touchZoomStart * (dist / touchDist), 0.2, 8);
+      requestFullRedraw();
+    }
+  }, { passive: false });
+
+  cv.addEventListener("touchend", e => {
+    if (e.touches.length === 0) {
+      isDragging = false;
+      touchStart = null;
+    }
+    if (e.touches.length < 2) {
+      touchDist = 0;
+    }
+  }, { passive: true });
+
+  // Redraw on resize (CSS-driven, canvas internal size stays fixed)
+  window.addEventListener("resize", () => { requestFullRedraw(); });
+
+  // Initial draw
+  sampleCurve();
+  updateStats();
+  redraw();
+
+})();
+</script>
 </body>
 </html>

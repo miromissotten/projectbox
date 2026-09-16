@@ -164,7 +164,7 @@
             position: relative;
             display: flex;
             align-items: stretch;
-            gap: 10px;
+            gap: 0;
             /* Horizontal scroller only. Do not add overflow-y: hidden back: with
                overflow-x set, the y axis can only be auto/hidden/scroll (clip
                degrades to hidden), and a y axis nobody can scroll is a known way
@@ -207,6 +207,7 @@
             scroll-snap-align: center;
             margin-bottom: 0;
             position: relative;
+            transition: transform 200ms ease, box-shadow 200ms ease, filter 120ms ease, opacity 120ms ease;
         }
 
         .carousel-viewport>a {
@@ -216,7 +217,7 @@
 
         @media (min-width: 768px) {
             .carousel-viewport {
-                gap: 12px;
+                gap: 0;
                 padding-left: calc(50% - 170px - 6px);
                 padding-right: calc(50% - 170px - 6px);
             }
@@ -1869,7 +1870,7 @@
                             rel.style.zIndex = String(100 - Math.min(Math.abs(rs - selected) * 10, 90));
                             rel.style.transform = "";
                             rel.style.filter = "";
-                            rel.style.opacity = rs === selected ? "1" : "0.55";
+                            rel.style.opacity = rs === selected ? "1" : "0.65";
                         }
                         return;
                     }
@@ -1882,10 +1883,10 @@
                         var side = off === 0 ? 0 : (off > 0 ? 1 : -1);
                         var dist = Math.abs(off);
                         var t = Math.min(dist, 1.6);
-                        var scale = 1 - 0.24 * t;
-                        var rot = side * 52 * t;
-                        var push = 46 * t;
-                        var dim = 0.3 * t;
+                        var scale = 1 - 0.08 * t;
+                        var rot = side * 18 * t;
+                        var push = -Math.min(Math.abs(elCenter - center) * 0.15, 16); /* inward: overlap behind centre */
+                        var dim = 0.15 * t;
                         el.style.zIndex = String(100 - Math.min(Math.round(t * 40), 60));
                         el.style.transform = "translateZ(0) translateX(" + (side * push).toFixed(1) + "px) rotateY(" + (-rot).toFixed(1) + "deg) scale(" + scale.toFixed(3) + ")";
                         el.style.filter = dim <= 0.01 ? "" : "brightness(" + (1 - dim).toFixed(3) + ") saturate(" + (1 - dim * 0.4).toFixed(3) + ")";
