@@ -1765,7 +1765,7 @@
             }
             document.querySelectorAll(".project-card:not(.project-link) figure img").forEach(function (img) {
                 img.addEventListener("click", function () {
-                    lightboxImg.src = img.src;
+                    lightboxImg.src = img.currentSrc || img.src;
                     lightboxImg.alt = img.alt;
                     lightbox.classList.add("is-open");
                     lightbox.setAttribute("aria-hidden", "false");
@@ -1988,7 +1988,7 @@
                 carousel.addEventListener("pointerdown", function (e) {
                     if (e.pointerType === "touch") { dragMoved = 0; return; }
                     if (e.button !== 0) { return; }
-                    if (e.target.closest("video, a, button, img")) { return; }
+                    if (e.target.closest("video, a, button")) { return; }
                     pointerDown = true;
                     dragging = false;
                     dragMoved = 0;
